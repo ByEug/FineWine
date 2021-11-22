@@ -1,0 +1,30 @@
+#footer {
+    position: absolute;
+    bottom: 0;
+}
+
+#image {
+    width: 100px;
+    height: 100px;
+}
+
+#header-right-block {
+    width: 250px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#header-overall {
+    display: flex;
+    justify-content: space-around;
+}
+
+#header-title {
+    display: flex;
+    justify-content: center;
+}
+
+#header-auth {
+    display: flex;
+    justify-content: space-evenly;
+}

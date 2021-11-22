@@ -1,0 +1,4 @@
+# Project exclude paths
+/core/target/
+/out/
+/web/target/
