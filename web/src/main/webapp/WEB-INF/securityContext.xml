@@ -22,12 +22,12 @@
         <authentication-provider>
             <jdbc-user-service
                     data-source-ref="dataSource"
-                    users-by-username-query="select mail, password, enabled from user where mail = ?"
-                    authorities-by-username-query="select user.mail as mail, role.role_name as role_name
+                    users-by-username-query="select username, password, enabled from user where username = ?"
+                    authorities-by-username-query="select user.username as username, role.role_name as role_name
                                                    from user
                                                    inner join user2role on user.id = user2role.id_user
                                                    inner join role on user2role.id_role = role.id
-                                                   where user.mail = ?"
+                                                   where user.username = ?"
             />
         </authentication-provider>
     </authentication-manager>

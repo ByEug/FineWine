@@ -9,7 +9,7 @@
     <div id="header-right-block">
         <div id="header-auth">
             <security:authorize access="isAuthenticated()">
-                <span id="nickname-span"><security:authentication property="mail"/></span>
+                <span id="nickname-span"><security:authentication property="name"/></span>
             </security:authorize>
             <security:authorize access="isAuthenticated()">
                 <a href="<c:url value="/j_spring_security_logout"/>">logout</a>

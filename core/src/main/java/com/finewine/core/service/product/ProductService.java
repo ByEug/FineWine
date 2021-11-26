@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    Product getProductById(Long id);
+    Product getProductById(String id);
 
     List<Product> getProductsFromWithLimit(int offset, int limit);
 

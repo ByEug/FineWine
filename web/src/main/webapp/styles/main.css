@@ -28,3 +28,15 @@
     display: flex;
     justify-content: space-evenly;
 }
+
+#login-error {
+    color: red;
+}
+
+.no-border-table {
+    border: 0;
+}
+
+.no-border-td {
+    border: 0;
+}

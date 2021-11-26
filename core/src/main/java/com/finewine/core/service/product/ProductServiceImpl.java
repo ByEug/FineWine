@@ -17,17 +17,18 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public Product getProductById(Long id) {
+    public Product getProductById(String id) {
         Optional<Product> product;
         try {
-            product = productDao.findById(id);
+            Long longId = Long.valueOf(id);
+            product = productDao.findById(longId);
         } catch (NumberFormatException | EmptyResultDataAccessException e) {
-            throw new NoElementWithSuchIdException(id.toString());
+            throw new NoElementWithSuchIdException(id);
         }
         if (product.isPresent()) {
             return product.get();
         } else {
-            throw new NoElementWithSuchIdException(id.toString());
+            throw new NoElementWithSuchIdException(id);
         }
     }
 

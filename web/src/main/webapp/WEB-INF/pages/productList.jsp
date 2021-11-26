@@ -11,7 +11,7 @@
     <c:forEach var="product" items="${products}">
         <div>
             <img id="image" src="${product.picturePath}">
-            <h3>${product.productName}</h3>
+            <a href="${pageContext.request.contextPath}/productDetails/${product.id}"><h3>${product.productName}</h3></a>
             <p>${product.country.englishName}</p>
             <p>${product.creatingDate}</p>
             <p>Price: ${product.price}$</p>
