@@ -95,3 +95,36 @@
 .items-inline {
     display: inline-flex;
 }
+
+#add-to-cart-form {
+    text-align: center;
+    border: 2px solid lightgrey;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.buttons {
+    text-align: center;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 5px;
+    background: lightgrey;
+    transition: 0.2s;
+}
+
+.vertical-divs {
+    display: flex;
+    flex-direction: column;
+}
+
+#success-result {
+    color: green;
+}
+
+#result-green {
+    color: green;
+}
+
+#result-red {
+    color: red;
+}

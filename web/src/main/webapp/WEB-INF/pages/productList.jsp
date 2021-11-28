@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css">
 </head>
 <body>
-    <tags:header/>
+    <tags:header cart="${cart}"/>
     <c:forEach var="product" items="${products}">
         <div>
             <img id="image" src="${product.picturePath}">
