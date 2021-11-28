@@ -9,24 +9,50 @@
 }
 
 #header-right-block {
-    width: 250px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
 }
 
 #header-overall {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 #header-title {
     display: flex;
     justify-content: center;
+    margin-left: 300px;
 }
 
 #header-auth {
     display: flex;
     justify-content: space-evenly;
+}
+
+#login {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#logout {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#nickname-span {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#header-account-button {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#header-cart-button {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 #login-error {
@@ -39,4 +65,33 @@
 
 .no-border-td {
     border: 0;
+}
+
+#horizontal-pdp {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#vertical-pdp-left {
+    display: flex;
+    flex-direction: column;
+}
+
+#vertical-pdp-right {
+    display: flex;
+    flex-direction: column;
+}
+
+#image-pdp {
+    width: 250px;
+    height: 250px;
+}
+
+#description-pdp {
+    width: 400px;
+}
+
+.items-inline {
+    display: inline-flex;
 }

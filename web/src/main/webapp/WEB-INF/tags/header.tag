@@ -4,7 +4,7 @@
 
 <div id="header-overall">
     <div id="header-title">
-        <h1>FineWine</h1>
+        <a href="${pageContext.request.contextPath}/productList"><h1>FineWine</h1></a>
     </div>
     <div id="header-right-block">
         <div id="header-auth">
@@ -12,17 +12,17 @@
                 <span id="nickname-span"><security:authentication property="name"/></span>
             </security:authorize>
             <security:authorize access="isAuthenticated()">
-                <a href="<c:url value="/j_spring_security_logout"/>">logout</a>
+                <a id="logout" href="<c:url value="/j_spring_security_logout"/>">logout</a>
             </security:authorize>
             <security:authorize access="!isAuthenticated()">
-                <a href="${pageContext.request.contextPath}/login">login</a>
+                <a id="login" href="${pageContext.request.contextPath}/login">login</a>
             </security:authorize>
-        </div>
-        <div id="header-cart-button">
-            <a>Cart</a>
         </div>
         <div id="header-account-button">
             <a>My account</a>
+        </div>
+        <div id="header-cart-button">
+            <a>Cart</a>
         </div>
     </div>
 </div>
