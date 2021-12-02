@@ -1,5 +1,6 @@
 <%@ tag trimDirectiveWhitespaces="true" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ attribute name="cart" type="com.finewine.core.model.cart.Cart" required="true" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <div id="header-overall">
@@ -22,7 +23,15 @@
             <a>My account</a>
         </div>
         <div id="header-cart-button">
-            <a>Cart</a>
+            <div class="vertical-divs">
+                <a href="${pageContext.request.contextPath}/cart">Cart</a>
+                <div class="items-inline">
+                    <p id="cart-quantity"><c:out value="${cart.totalQuantity}"/></p>&nbsp
+                    <p>items for</p>&nbsp
+                    <p id="cart-cost"><c:out value="${cart.totalCost}"/></p>
+                    <p>$</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
