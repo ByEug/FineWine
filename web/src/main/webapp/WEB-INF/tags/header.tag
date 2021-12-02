@@ -24,7 +24,7 @@
         </div>
         <div id="header-cart-button">
             <div class="vertical-divs">
-                <a>Cart</a>
+                <a href="${pageContext.request.contextPath}/cart">Cart</a>
                 <div class="items-inline">
                     <p id="cart-quantity"><c:out value="${cart.totalQuantity}"/></p>&nbsp
                     <p>items for</p>&nbsp
