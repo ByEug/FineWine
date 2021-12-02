@@ -73,6 +73,12 @@
     justify-content: space-around;
 }
 
+#horizontal-cart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 #vertical-pdp-left {
     display: flex;
     flex-direction: column;
@@ -127,4 +133,12 @@
 
 #result-red {
     color: red;
+}
+
+.red-res {
+    color: red;
+}
+
+.green-res {
+    color: green;
 }

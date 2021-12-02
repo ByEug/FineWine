@@ -2,6 +2,7 @@ package com.finewine.core.service.cart;
 
 import com.finewine.core.exception.EmptyDatabaseArgumentException;
 import com.finewine.core.exception.IllegalQuantityException;
+import com.finewine.core.exception.NoElementWithSuchIdException;
 import com.finewine.core.exception.OutOfStockException;
 import com.finewine.core.model.cart.Cart;
 import com.finewine.core.model.cart.CartItem;
@@ -83,12 +84,37 @@ public class HttpSessionCartServiceImpl implements CartService {
 
     @Override
     public void updateProduct(Long productId, Long quantity, Cart cart) throws EmptyDatabaseArgumentException, OutOfStockException {
-
+        Optional<CartItem> optionalExistingSameCartItem;
+        Product product;
+        try {
+            optionalExistingSameCartItem = findSameCartItem(productId, cart);
+            product = productService.getProductById(productId.toString());
+        } catch (EmptyResultDataAccessException e) {
+            throw new EmptyDatabaseArgumentException(env.getProperty("error.emptyDatabaseArgument"));
+        }
+        if (optionalExistingSameCartItem.isPresent()) {
+            CartItem existingSameItem = optionalExistingSameCartItem.get();
+            ShopStock shopStock = product.getStock();
+            if (shopStock.getStock() >= quantity) {
+                existingSameItem.setQuantity(quantity);
+                calculateCart(cart);
+            } else {
+                throw new OutOfStockException(env.getProperty("error.outOfStock"));
+            }
+        } else {
+            throw new EmptyDatabaseArgumentException(env.getProperty("error.emptyDatabaseArgument"));
+        }
     }
 
     @Override
     public void removeProduct(Long productId, Cart cart) {
-
+        Optional<CartItem> optionalCartItem = findSameCartItem(productId, cart);
+        if (optionalCartItem.isPresent()) {
+            cart.getCartItems().remove(optionalCartItem.get());
+        } else {
+            throw new NoElementWithSuchIdException(productId.toString());
+        }
+        calculateCart(cart);
     }
 
     @Override

@@ -12,4 +12,12 @@
     <bean id="webExpressionHandler"
           class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 
+    <bean id="themeSource" class="org.springframework.ui.context.support.ResourceBundleThemeSource">
+        <property name="basenamePrefix" value="lang-"/>
+    </bean>
+
+    <bean id="themeResolver" class="org.springframework.web.servlet.theme.CookieThemeResolver">
+        <property name="defaultThemeName" value="en"/>
+    </bean>
+
 </beans>
