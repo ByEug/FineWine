@@ -42,17 +42,38 @@
                 </c:forEach>
             </div>
         </form:form>
-        <form id="to-order-form" action="${pageContext.request.contextPath}/order">
-        </form>
         <div id="cart-buttons">
             <button class="buttons" id="update-cart" form="update-form">
                 Update
             </button>
-            <button class="buttons" id="order-cart" form="to-order-form">
-                Order
-            </button>
         </div>
+        <form id="to-order-form" action="${pageContext.request.contextPath}/order?orderType=Delivery">
+            <div class="items-inline">
+                <label for="order-type">Choose order type:&nbsp</label><select name="orderType" id="order-type">
+                    <c:forEach items="${orderTypes}" var="orderType">
+                        <option>${orderType.name()}</option>
+                    </c:forEach>
+                </select>
+                &nbsp
+                <button class="buttons" id="order-cart" form="to-order-form">
+                    Order
+                </button>
+            </div>
+        </form>
     </c:if>
 
 </body>
 </html>
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded',function(){
+        document.getElementById('order-type').onchange = function(){
+            var value = this.value || "Delivery";
+            document.forms[1].action='${pageContext.request.contextPath}/order?orderType=' + value;
+        }
+        document.forms[1].onsubmit = function(){
+            if(this.action) return true;
+            return false;
+        }
+    });
+</script>
