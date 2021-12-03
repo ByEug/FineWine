@@ -21,5 +21,5 @@ public interface CartService {
 
     void calculateCart(Cart cart);
 
-    void checkCartItemsForOutOfStock(Cart cart) throws OutOfStockException;
+    //void checkCartItemsForOutOfStock(Cart cart) throws OutOfStockException;
 }

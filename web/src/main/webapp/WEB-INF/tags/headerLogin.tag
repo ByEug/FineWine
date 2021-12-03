@@ -4,7 +4,7 @@
 
 <div id="header-overall">
     <div id="header-title">
-        <h1>FineWine</h1>
+        <a href="${pageContext.request.contextPath}/productList"><h1>FineWine</h1></a>
     </div>
 </div>
 <hr/>

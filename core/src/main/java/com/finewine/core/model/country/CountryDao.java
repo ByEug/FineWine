@@ -8,4 +8,6 @@ public interface CountryDao {
     List<Country> findAll();
 
     Optional<Country> findById(Long id);
+
+    Optional<Country> findByEnglishName(String name);
 }
