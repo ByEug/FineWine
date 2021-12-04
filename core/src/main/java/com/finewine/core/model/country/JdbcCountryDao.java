@@ -16,6 +16,7 @@ public class JdbcCountryDao implements CountryDao {
 
     private final String SQL_SELECT_FOR_FIND_ALL_SIMPLE = "select * from country";
     private final String SQL_SELECT_FOR_FIND_BY_ID = "select * from country where id = ";
+    private final String SQL_SELECT_FOR_FIND_BY_NAME = "select * from country where english_name = '%s'";
 
     @Override
     public List<Country> findAll() {
@@ -25,6 +26,12 @@ public class JdbcCountryDao implements CountryDao {
     @Override
     public Optional<Country> findById(Long id) {
         return Optional.ofNullable(jdbcTemplate.queryForObject(SQL_SELECT_FOR_FIND_BY_ID + id,
+                new BeanPropertyRowMapper<>(Country.class)));
+    }
+
+    @Override
+    public Optional<Country> findByEnglishName(String name) {
+        return Optional.ofNullable(jdbcTemplate.queryForObject(String.format(SQL_SELECT_FOR_FIND_BY_NAME, name),
                 new BeanPropertyRowMapper<>(Country.class)));
     }
 }

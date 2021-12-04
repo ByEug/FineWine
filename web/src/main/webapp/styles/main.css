@@ -175,10 +175,13 @@
     color: red;
 }
 
+.required {
+    color: red;
+}
+
 .green-res {
     color: green;
 }
-
 
 input, select, button{
     opacity: 1;
@@ -201,5 +204,25 @@ button[disabled]{
     margin: 0 auto;
 }
 
+.horizontal-order {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
 
-/*------------*/
+.vertical-products-order {
+    display: flex;
+    flex-direction: column;
+}
+
+#add-info-to-order {
+    height: 100px;
+    width: 245px;
+    resize: none;
+}
+
+#horizontal-order-overview {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
