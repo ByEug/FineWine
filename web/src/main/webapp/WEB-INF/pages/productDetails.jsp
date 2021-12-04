@@ -4,14 +4,18 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous">
     <title>${product.productName}</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css">
 </head>
 <body>
-<tags:header cart="${cart}"/>
-<input class="buttons" type="button" onclick="history.go(-1);" value="Back to the products"/>
-<div id="success-result">
-</div>
+    <tags:header cart="${cart}"/>
+    <input class="buttons" type="button" onclick="history.go(-1);" value="Back to the products"/>
+    <div id="success-result">
+    </div>
     <div id="horizontal-pdp">
         <div id="vertical-pdp-left">
             <div class="items-inline">
@@ -53,49 +57,48 @@
             </div>
         </div>
     </div>
-</body>
+    <tags:footer/>
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $("#addToCartForm").submit(function (event) {
+                event.preventDefault();
+                addToCart();
+            });
+        })
 
-<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-<script>
-    jQuery(document).ready(function ($) {
-        $("#addToCartForm").submit(function (event) {
-            event.preventDefault();
-            addToCart();
-        });
-    })
+        function addToCart() {
 
-    function addToCart() {
+            var id = $("#productId").val();
+            var quantity = $("#quantity").val();
 
-        var id = $("#productId").val();
-        var quantity = $("#quantity").val();
-
-        $.ajax({
-            type: 'POST',
-            url: '${pageContext.request.contextPath}/ajaxCart',
-            data: 'id=' + id + '&quantity=' + quantity,
-            success: function (message) {
-                var json = JSON.stringify(message);
-                var jsonObject = JSON.parse(json);
-                $('#cart-quantity').text(jsonObject.totalQuantity);
-                $('#cart-cost').text(jsonObject.totalCost);
-                $('#success-result').text('Product added to cart successfully');
-                $('#result-green').text('Product added to cart successfully');
-                $('#result-red').text('');
-            },
-            error: function (message) {
-                $('#success-result').text('');
-                var json = JSON.stringify(message);
-                var jsonObject = JSON.parse(json);
-                var responseTextObject = JSON.parse(jsonObject.responseText);
-                $('#result-green').text('');
-                if (responseTextObject.errorsMessage !== undefined) {
-                    $('#result-red').text(responseTextObject.errorsMessage);
-                } else {
-                    $('#result-red').text(responseTextObject.errors[0].code);
+            $.ajax({
+                type: 'POST',
+                url: '${pageContext.request.contextPath}/ajaxCart',
+                data: 'id=' + id + '&quantity=' + quantity,
+                success: function (message) {
+                    var json = JSON.stringify(message);
+                    var jsonObject = JSON.parse(json);
+                    $('#cart-quantity').text(jsonObject.totalQuantity);
+                    $('#cart-cost').text(jsonObject.totalCost);
+                    $('#success-result').text('Product added to cart successfully');
+                    $('#result-green').text('Product added to cart successfully');
+                    $('#result-red').text('');
+                },
+                error: function (message) {
+                    $('#success-result').text('');
+                    var json = JSON.stringify(message);
+                    var jsonObject = JSON.parse(json);
+                    var responseTextObject = JSON.parse(jsonObject.responseText);
+                    $('#result-green').text('');
+                    if (responseTextObject.errorsMessage !== undefined) {
+                        $('#result-red').text(responseTextObject.errorsMessage);
+                    } else {
+                        $('#result-red').text(responseTextObject.errors[0].code);
+                    }
                 }
-            }
-        });
-    }
-</script>
-
+            });
+        }
+    </script>
+</body>
 </html>

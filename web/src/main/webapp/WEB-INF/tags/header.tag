@@ -3,36 +3,79 @@
 <%@ attribute name="cart" type="com.finewine.core.model.cart.Cart" required="true" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
-<div id="header-overall">
-    <div id="header-title">
-        <a href="${pageContext.request.contextPath}/productList"><h1>FineWine</h1></a>
-    </div>
-    <div id="header-right-block">
-        <div id="header-auth">
-            <security:authorize access="isAuthenticated()">
-                <span id="nickname-span"><security:authentication property="name"/></span>
-            </security:authorize>
-            <security:authorize access="isAuthenticated()">
-                <a id="logout" href="<c:url value="/j_spring_security_logout"/>">logout</a>
-            </security:authorize>
-            <security:authorize access="!isAuthenticated()">
-                <a id="login" href="${pageContext.request.contextPath}/login">login</a>
-            </security:authorize>
-        </div>
-        <div id="header-account-button">
-            <a>My account</a>
-        </div>
-        <div id="header-cart-button">
-            <div class="vertical-divs">
-                <a href="${pageContext.request.contextPath}/cart">Cart</a>
+
+<div class="container-fluid">
+
+    <nav id="navbar"
+         class="navbar fixed-top navbar-expand-md flex-nowrap navbar-new-top">
+        <a href="${pageContext.request.contextPath}/productList" class="navbar-brand"><img
+                src="images/logo.png" alt="logo" /></a>
+        <ul class="nav navbar-nav mr-auto"></ul>
+        <ul class="navbar-nav flex-row">
+            <li class="nav-item">
+                <security:authorize access="isAuthenticated()">
+                    <span id="nickname-span"><security:authentication property="name"/></span>
+                </security:authorize>
+            </li>
+            <li class="nav-item">
+                <security:authorize access="isAuthenticated()">
+                    <a id="logout" href="<c:url value="/j_spring_security_logout"/>">logout</a>
+                </security:authorize>
+            </li>
+            <li>
+                <security:authorize access="!isAuthenticated()">
+                    <a id="login" href="${pageContext.request.contextPath}/login">login</a>
+                </security:authorize>
+            </li>
+            <li>
+                <a>My account</a>
+            </li>
+            <li class="nav-item">
+                <a href="${pageContext.request.contextPath}/cart" class="nav-link px-2">
+                    <img src="${pageContext.request.contextPath}/images/shopping-cart.png" alt="cart" />
+                </a>
                 <div class="items-inline">
                     <p id="cart-quantity"><c:out value="${cart.totalQuantity}"/></p>&nbsp
                     <p>items for</p>&nbsp
                     <p id="cart-cost"><c:out value="${cart.totalCost}"/></p>
                     <p>$</p>
                 </div>
-            </div>
-        </div>
-    </div>
+            </li>
+        </ul>
+    </nav>
+    <br>
 </div>
+
+<%--<div id="header-overall">--%>
+<%--    <div id="header-title">--%>
+<%--        <a href="${pageContext.request.contextPath}/productList"><h1>FineWine</h1></a>--%>
+<%--    </div>--%>
+<%--    <div id="header-right-block">--%>
+<%--        <div id="header-auth">--%>
+<%--            <security:authorize access="isAuthenticated()">--%>
+<%--                <span id="nickname-span"><security:authentication property="name"/></span>--%>
+<%--            </security:authorize>--%>
+<%--            <security:authorize access="isAuthenticated()">--%>
+<%--                <a id="logout" href="<c:url value="/j_spring_security_logout"/>">logout</a>--%>
+<%--            </security:authorize>--%>
+<%--            <security:authorize access="!isAuthenticated()">--%>
+<%--                <a id="login" href="${pageContext.request.contextPath}/login">login</a>--%>
+<%--            </security:authorize>--%>
+<%--        </div>--%>
+<%--        <div id="header-account-button">--%>
+<%--            <a>My account</a>--%>
+<%--        </div>--%>
+<%--        <div id="header-cart-button">--%>
+<%--            <div class="vertical-divs">--%>
+<%--                <a href="${pageContext.request.contextPath}/cart">Cart</a>--%>
+<%--                <div class="items-inline">--%>
+<%--                    <p id="cart-quantity"><c:out value="${cart.totalQuantity}"/></p>&nbsp--%>
+<%--                    <p>items for</p>&nbsp--%>
+<%--                    <p id="cart-cost"><c:out value="${cart.totalCost}"/></p>--%>
+<%--                    <p>$</p>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <hr/>
