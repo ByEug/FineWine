@@ -4,6 +4,7 @@ import com.finewine.core.exception.EmptyDatabaseArgumentException;
 import com.finewine.core.exception.NoElementWithSuchIdException;
 import com.finewine.core.exception.OutOfStockException;
 import com.finewine.core.model.cart.Cart;
+import com.finewine.core.model.order.OrderType;
 import com.finewine.core.model.product.Product;
 import com.finewine.core.model.product.ProductArrayDTO;
 import com.finewine.core.model.product.ProductDTO;
@@ -47,6 +48,7 @@ public class CartPageController {
             model.addAttribute("isEmpty", env.getProperty("emptyCartMessage"));
         }
         model.addAttribute("cart", cart);
+        model.addAttribute("orderTypes", OrderType.values());
         model.addAttribute("productArrayDTO", new ProductArrayDTO(cart.getCartItems()));
         return "cart";
     }
@@ -64,6 +66,7 @@ public class CartPageController {
             }
         });
         model.addAttribute("cart", cart);
+        model.addAttribute("orderTypes", OrderType.values());
         model.addAttribute("updatedProductIds", updatedProductIds);
         model.addAttribute("successfulUpdateMessage", env.getProperty("successfulUpdateMessage"));
         model.addAttribute("productArrayDTO", productArrayDTO);
@@ -103,6 +106,7 @@ public class CartPageController {
         model.addAttribute("message", env.getProperty("deleteFromCartMessage"));
         model.addAttribute("productArrayDTO", new ProductArrayDTO(cart.getCartItems()));
         model.addAttribute("cart", cart);
+        model.addAttribute("orderTypes", OrderType.values());
         return "cart";
     }
 

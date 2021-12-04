@@ -7,11 +7,8 @@ import com.finewine.core.exception.OutOfStockException;
 import com.finewine.core.model.cart.Cart;
 import com.finewine.core.model.cart.CartItem;
 import com.finewine.core.model.product.Product;
-import com.finewine.core.model.product.ProductDao;
 import com.finewine.core.model.shopstock.ShopStock;
-import com.finewine.core.model.shopstock.ShopStockDao;
 import com.finewine.core.service.product.ProductService;
-import com.finewine.core.service.shopstock.ShopStockService;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -129,8 +126,26 @@ public class HttpSessionCartServiceImpl implements CartService {
         cart.setTotalCost(totalCost);
     }
 
-    @Override
-    public void checkCartItemsForOutOfStock(Cart cart) throws OutOfStockException {
-
-    }
+//    @Override
+//    public void checkCartItemsForOutOfStock(Cart cart) throws OutOfStockException {
+//        List<Long> idsOutOfStock = new ArrayList<>();
+//        cart.getCartItems().forEach(cartItem -> {
+//            if (!checkQuantityForOutOfStock(cartItem.getProduct().getId(), cartItem.getQuantity())) {
+//                idsOutOfStock.add(cartItem.getProduct().getId());
+//            }
+//        });
+//        if (CollectionUtils.isNotEmpty(idsOutOfStock)) {
+//            idsOutOfStock.forEach(id -> removeProduct(id, cart));
+//            throw new OutOfStockException();
+//        }
+//    }
+//
+//    private boolean checkQuantityForOutOfStock(Long phoneId, Long quantity) {
+//        Optional<Stock> optionalStock = jdbcStockDao.get(phoneId);
+//        if (optionalStock.isPresent()) {
+//            Stock stock = optionalStock.get();
+//            return stock.getStock() >= quantity;
+//        }
+//        return false;
+//    }
 }
