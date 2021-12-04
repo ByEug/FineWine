@@ -69,7 +69,10 @@ public class OrderPageController {
 
     private void prepareModelToShowCart(Cart cart, OrderType currentOrderType, Model model) {
         model.addAttribute("cart", cart);
+        model.addAttribute("currentOrderType", currentOrderType);
         if (currentOrderType.equals(OrderType.Delivery)) {
+            List<Country> countries = countryService.getAll();
+            model.addAttribute("countries", countries);
             model.addAttribute("deliveryPrice", Long.parseLong(env.getProperty("delivery.price")));
             model.addAttribute("totalPrice",
                     cart.getTotalCost().add(BigDecimal.valueOf(Long.parseLong(env.getProperty("delivery.price")))));
@@ -80,9 +83,9 @@ public class OrderPageController {
     }
 
     @RequestMapping(value = "/inventory", method = RequestMethod.POST)
-    public String placeInventoryOrder(@Validated @ModelAttribute(name = "preOrderDataDTO") PreOrderDataDTO preOrderDataDTO,
-                             @RequestParam(required = false) String orderType,
-                             BindingResult bindingResult, Principal principal, Model model) {
+    public String placeInventoryOrder(@RequestParam(required = false) String orderType,
+                                      @Validated @ModelAttribute(name = "preOrderDataDTO") PreOrderDataDTO preOrderDataDTO,
+                                      BindingResult bindingResult, Principal principal, Model model) {
         Cart cart = cartService.getCart(httpSession);
         OrderType currentOrderType = checkForValidOrderType(orderType);
         if (cart.getCartItems().isEmpty()) {
@@ -96,8 +99,8 @@ public class OrderPageController {
     }
 
     @RequestMapping(value = "/delivery", method = RequestMethod.POST)
-    public String placeDeliveryOrder(@Validated @ModelAttribute(name = "orderFullDataDTO") OrderFullDataDTO orderFullDataDTO,
-                                     @RequestParam(required = false) String orderType,
+    public String placeDeliveryOrder(@RequestParam(required = false) String orderType,
+                                     @Validated @ModelAttribute(name = "orderFullDataDTO") OrderFullDataDTO orderFullDataDTO,
                                      BindingResult bindingResult, Principal principal, Model model) {
         Cart cart = cartService.getCart(httpSession);
         OrderType currentOrderType = checkForValidOrderType(orderType);
