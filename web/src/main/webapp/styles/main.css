@@ -1,7 +1,43 @@
-#footer {
-    position: absolute;
-    bottom: 0;
+/*Footer*/
+.footer {
+    background: #121212;
+    margin: 0;
 }
+
+.copyright a{
+    color: darkred;
+}
+.footer p{
+    color: rgba(255,255,255,.3);
+}
+.footer-heading{
+    font-size: 30px;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+.logo{
+    color: white;
+}
+.menu{
+    margin-bottom: 30px;
+}
+.menu a{
+    color: rgba(255,255,255,.6);
+    margin: 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+/*.ftco-footer-social{*/
+/*li{*/
+/*a{*/
+/*    background: transparent;*/
+/*    border: 1px solid primary;*/
+/*}*/
+/*}*/
+/*}*/
+
+
 
 #image {
     width: 100px;
@@ -142,3 +178,28 @@
 .green-res {
     color: green;
 }
+
+
+input, select, button{
+    opacity: 1;
+    transition: all 0.2s ease-in;
+}
+
+[readonly], [disabled]{
+    border: 1px solid transparent!important;
+    cursor: not-allowed;
+    transition: all 0.2s ease-in;
+}
+
+button[disabled]{
+    opacity: 0;
+    transition: all 0.2s ease-in;
+}
+
+.c-header, .container, .container-custom {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+
+/*------------*/
