@@ -22,7 +22,7 @@
         </div>
         <div>
             <h3>
-                <a href="">My Inventory</a>
+                <a href="${pageContext.request.contextPath}/userInventory">My Inventory</a>
             </h3>
         </div>
     </div>
@@ -41,7 +41,7 @@
         </div>
         <div>
             <h3>
-                <a href="">Trading platform</a>
+                <a href="${pageContext.request.contextPath}/tradingPlatform">Trading Platform</a>
             </h3>
         </div>
     </div>
