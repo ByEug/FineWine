@@ -8,6 +8,7 @@ public class InventoryItem {
     private InventoryStock inventoryStock;
     private Product product;
     private Inventory inventory;
+    private Boolean isOnSell;
 
     public Long getId() {
         return id;
@@ -39,5 +40,13 @@ public class InventoryItem {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public Boolean getOnSell() {
+        return isOnSell;
+    }
+
+    public void setOnSell(Boolean onSell) {
+        isOnSell = onSell;
     }
 }
