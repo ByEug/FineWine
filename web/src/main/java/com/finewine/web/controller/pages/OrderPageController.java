@@ -3,11 +3,13 @@ package com.finewine.web.controller.pages;
 import com.finewine.core.exception.NoSuchOrderTypeException;
 import com.finewine.core.model.cart.Cart;
 import com.finewine.core.model.country.Country;
+import com.finewine.core.model.order.Order;
 import com.finewine.core.model.order.OrderFullDataDTO;
 import com.finewine.core.model.order.OrderType;
 import com.finewine.core.model.order.PreOrderDataDTO;
 import com.finewine.core.service.cart.CartService;
 import com.finewine.core.service.country.CountryService;
+import com.finewine.core.service.inventory.InventoryService;
 import com.finewine.core.service.order.OrderService;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -40,6 +42,9 @@ public class OrderPageController {
 
     @Resource
     private CartService cartService;
+
+    @Resource
+    private InventoryService inventoryService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getOrder(@RequestParam(required = false) String orderType, Principal principal, Model model) {
@@ -115,7 +120,9 @@ public class OrderPageController {
     }
 
     private String manageInventoryOrder(Cart cart, PreOrderDataDTO preOrderDataDTO, Principal principal) {
-        Long id = orderService.placeInventoryOrder(cart, preOrderDataDTO);
+        Long id = orderService.placeInventoryOrder(cart, preOrderDataDTO, principal.getName());
+        Order createdOrder = orderService.getOrder(id.toString());
+        inventoryService.createInventoryItemsFromOrderItems(createdOrder, principal.getName());
         cartService.deleteCart(httpSession);
         return "redirect:/orderOverview/" + id;
     }

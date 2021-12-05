@@ -5,11 +5,15 @@ import com.finewine.core.model.order.Order;
 import com.finewine.core.model.order.OrderFullDataDTO;
 import com.finewine.core.model.order.PreOrderDataDTO;
 
+import java.util.List;
+
 public interface OrderService {
 
     Order getOrder(String id);
 
-    Long placeInventoryOrder(Cart cart, PreOrderDataDTO preOrderDataDTO);
+    List<Order> getOrderListForUser(Long userId);
+
+    Long placeInventoryOrder(Cart cart, PreOrderDataDTO preOrderDataDTO, String username);
 
     Long createDeliveryPreOrderForAuth(Cart cart, OrderFullDataDTO orderFullDataDTO, Long deliveryPrice, String username);
 

@@ -1,4 +1,4 @@
-package com.finewine.core.inventory;
+package com.finewine.core.model.inventory;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,6 +19,7 @@ public class JdbcInventoryDao implements InventoryDao {
 
     private final String SQL_SELECT_FOR_FIND_BY_ID = "select * from inventory where id = ";
     private final String SQL_SAVE_INVENTORY = "insert into inventory (overall_quantity) values (?)";
+    private final String SQL_UPDATE_INVENTORY = "update inventory set overall_quantity = %d where id = %d";
 
     @Override
     public Optional<Inventory> findById(Long id) {
@@ -38,5 +39,9 @@ public class JdbcInventoryDao implements InventoryDao {
             return preparedStatement;
         }, keyHolder);
         return keyHolder.getKey().longValue();
+    }
+
+    public void update(Long overallQuantity, Long id) {
+        jdbcTemplate.update(String.format(SQL_UPDATE_INVENTORY, overallQuantity, id));
     }
 }
