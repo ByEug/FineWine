@@ -19,7 +19,7 @@
             </security:authorize>
         </div>
         <div id="header-account-button">
-            <a>My account</a>
+            <a href="${pageContext.request.contextPath}/myAccount">My account</a>
         </div>
     </div>
 </div>

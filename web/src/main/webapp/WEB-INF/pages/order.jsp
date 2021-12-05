@@ -44,13 +44,13 @@
         <form:form method="post" action="${pageContext.request.contextPath}/order/inventory?orderType=${currentOrderType}" commandName="preOrderDataDTO">
             <div class="vertical-divs">
                 <div>
-                    <tags:orderRow label="firstNameOrder" id="first-name" name="firstName"/>
+                    <tags:validationRow label="firstNameOrder" id="first-name" name="firstName"/>
                 </div>
                 <div>
-                    <tags:orderRow label="lastNameOrder" id="last-name" name="lastName"/>
+                    <tags:validationRow label="lastNameOrder" id="last-name" name="lastName"/>
                 </div>
                 <div>
-                    <tags:orderRow label="phoneOrder" id="phone" name="phone"/>
+                    <tags:validationRow label="phoneOrder" id="phone" name="phone"/>
                 </div>
                 <div>
                     <form:textarea path="additionalInformation" id="add-info-to-order" name="additionalInformation" placeholder="Additional information" maxlength="2000"/>
@@ -66,13 +66,13 @@
         <form:form method="post" action="${pageContext.request.contextPath}/order/delivery?orderType=${currentOrderType}" commandName="orderFullDataDTO">
             <div class="vertical-divs">
                 <div>
-                    <tags:orderRow label="firstNameOrder" id="first-name" name="firstName"/>
+                    <tags:validationRow label="firstNameOrder" id="first-name" name="firstName"/>
                 </div>
                 <div>
-                    <tags:orderRow label="lastNameOrder" id="last-name" name="lastName"/>
+                    <tags:validationRow label="lastNameOrder" id="last-name" name="lastName"/>
                 </div>
                 <div>
-                    <tags:orderRow label="phoneOrder" id="phone" name="phone"/>
+                    <tags:validationRow label="phoneOrder" id="phone" name="phone"/>
                 </div>
                 <div>
                     <form:textarea path="additionalInformation" id="add-info-to-order" name="additionalInformation" placeholder="Additional information" maxlength="2000"/>
@@ -97,16 +97,16 @@
                     </div>
                 </div>
                 <div>
-                    <tags:orderRow label="localityOrder" id="locality" name="addressDTO.locality"/>
+                    <tags:validationRow label="localityOrder" id="locality" name="addressDTO.locality"/>
                 </div>
                 <div>
-                    <tags:orderRow label="streetOrder" id="street" name="addressDTO.street"/>
+                    <tags:validationRow label="streetOrder" id="street" name="addressDTO.street"/>
                 </div>
                 <div>
-                    <tags:orderRow label="homeNumberOrder" id="home-number" name="addressDTO.homeNumber"/>
+                    <tags:validationRow label="homeNumberOrder" id="home-number" name="addressDTO.homeNumber"/>
                 </div>
                 <div>
-                    <tags:orderRow label="flatNumberOrder" id="flat-number" name="addressDTO.flatNumber"/>
+                    <tags:validationRow label="flatNumberOrder" id="flat-number" name="addressDTO.flatNumber"/>
                 </div>
             </div>
             <br>

@@ -6,15 +6,19 @@ import com.finewine.core.model.country.Country;
 import com.finewine.core.model.order.*;
 import com.finewine.core.model.shopstock.ShopStock;
 import com.finewine.core.model.shopstock.ShopStockDao;
+import com.finewine.core.model.user.CustomUser;
 import com.finewine.core.service.address.AddressService;
 import com.finewine.core.service.country.CountryService;
 import com.finewine.core.service.product.ProductService;
+import com.finewine.core.service.user.CustomUserService;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,6 +32,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Resource
     private CountryService countryService;
+
+    @Resource
+    private CustomUserService customUserService;
 
     @Resource
     private ShopStockDao shopStockDao;
@@ -52,11 +59,22 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Long placeInventoryOrder(Cart cart, PreOrderDataDTO preOrderDataDTO) {
+    public List<Order> getOrderListForUser(Long userId) {
+        if (orderDao.checkCountForUser(userId) > 0) {
+            return orderDao.getOrdersForUserId(userId);
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public Long placeInventoryOrder(Cart cart, PreOrderDataDTO preOrderDataDTO, String username) {
         InventoryOrderBuilder orderBuilder = new InventoryOrderBuilder(cart, preOrderDataDTO);
         Order order = orderBuilder.getOrder();
         updateStocks(order);
         order.setCreatingDate(Date.valueOf(LocalDate.now()));
+        CustomUser customUser = customUserService.findByUsername(username);
+        order.setUser(customUser);
         return orderDao.saveInventoryOrder(order);
     }
 
@@ -69,7 +87,9 @@ public class OrderServiceImpl implements OrderService {
         updateStocks(order);
         order.setCreatingDate(Date.valueOf(LocalDate.now()));
         Long id = addressService.saveAddress(order.getAddress(), country.getId());
-        return orderDao.saveDeliveryOrder(order, id);
+        CustomUser customUser = customUserService.findByUsername(username);
+        order.setUser(customUser);
+        return orderDao.saveDeliveryOrderAuth(order, id);
     }
 
     private void updateStocks(Order order) {
@@ -89,6 +109,6 @@ public class OrderServiceImpl implements OrderService {
         updateStocks(order);
         order.setCreatingDate(Date.valueOf(LocalDate.now()));
         Long id = addressService.saveAddress(order.getAddress(), country.getId());
-        return orderDao.saveDeliveryOrder(order, id);
+        return orderDao.saveDeliveryOrderGuest(order, id);
     }
 }

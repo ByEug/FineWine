@@ -1,7 +1,7 @@
 package com.finewine.core.model.order;
 
 import com.finewine.core.model.address.Address;
-import org.springframework.security.core.userdetails.User;
+import com.finewine.core.model.user.CustomUser;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -25,7 +25,7 @@ public class Order {
     private String phoneNumber;
     private String additionalInformation;
     private Address address;
-    private User user;
+    private CustomUser user;
 
     public Order() {
         orderItems = new ArrayList<>();
@@ -151,11 +151,11 @@ public class Order {
         this.address = address;
     }
 
-    public User getUser() {
+    public CustomUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(CustomUser user) {
         this.user = user;
     }
 }

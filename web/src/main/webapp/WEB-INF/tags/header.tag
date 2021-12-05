@@ -28,7 +28,7 @@
                 </security:authorize>
             </li>
             <li>
-                <a>My account</a>
+                <a href="${pageContext.request.contextPath}/myAccount">My account</a>
             </li>
             <li class="nav-item">
                 <a href="${pageContext.request.contextPath}/cart" class="nav-link px-2">
