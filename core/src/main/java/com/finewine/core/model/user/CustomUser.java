@@ -1,6 +1,6 @@
 package com.finewine.core.model.user;
 
-import com.finewine.core.inventory.Inventory;
+import com.finewine.core.model.inventory.Inventory;
 
 import java.math.BigDecimal;
 

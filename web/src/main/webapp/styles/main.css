@@ -159,6 +159,12 @@
     flex-direction: column;
 }
 
+.horizontal-divs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 #success-result {
     color: green;
 }

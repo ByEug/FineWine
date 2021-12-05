@@ -26,13 +26,18 @@ public class JdbcOrderDao implements OrderDao {
     private final String SQL_SELECT_FOR_FIND_BY_ID = "select * from orders where id = ";
     private static final String SQL_SELECT_FOR_MAP_ROW = "select * from order_item where id_order = ";
     private static final String SQL_SAVE_ORDER_INVENTORY = "insert into orders (subtotal_price, delivery_price, total_price, first_name," +
-            " last_name, phone_number, additional_information, creating_date, order_type, order_status) " +
-            "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SQL_SAVE_ORDER_DELIVERY = "insert into orders (subtotal_price, delivery_price, total_price, first_name," +
+            " last_name, phone_number, additional_information, creating_date, order_type, order_status, id_user) " +
+            "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_SAVE_ORDER_DELIVERY_GUEST = "insert into orders (subtotal_price, delivery_price, total_price, first_name," +
             " last_name, phone_number, additional_information, creating_date, order_type, order_status, id_address) " +
             "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_SAVE_ORDER_DELIVERY_AUTH = "insert into orders (subtotal_price, delivery_price, total_price, first_name," +
+            " last_name, phone_number, additional_information, creating_date, order_type, order_status, id_address, id_user) " +
+            "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_SAVE_ORDER_ITEM = "insert into order_item (id_product, id_order, quantity) " +
             "values (?, ?, ?)";
+    private final String SQL_COUNT_BY_ID = "select count(*) from orders where id = %d";
+    private final String SQL_SELECT_ORDERS_FOR_USER_ID = "select * from orders where id_user = %d";
 
     @Resource
     private JdbcTemplate jdbcTemplate;
@@ -50,13 +55,24 @@ public class JdbcOrderDao implements OrderDao {
     }
 
     @Override
+    public Integer checkCountForUser(Long userId) {
+        return jdbcTemplate.queryForObject(String.format(SQL_COUNT_BY_ID, userId), Integer.class);
+    }
+
+    @Override
+    public List<Order> getOrdersForUserId(Long userId) {
+        return jdbcTemplate.query(String.format(SQL_SELECT_ORDERS_FOR_USER_ID, userId), new OrderBeanPropertyRowMapper());
+    }
+
+    @Override
     public Long saveInventoryOrder(Order order) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         Object[] orderParams = new Object[]{order.getSubtotalPrice().multiply(BigDecimal.valueOf(100L)),
                 order.getDeliveryPrice().multiply(BigDecimal.valueOf(100L)),
                 order.getTotalPrice().multiply(BigDecimal.valueOf(100L)),
                 order.getFirstName(), order.getLastName(), order.getPhoneNumber(),
-                order.getAdditionalInformation(), order.getCreatingDate(), order.getOrderType().toString(), order.getOrderStatus().toString()};
+                order.getAdditionalInformation(), order.getCreatingDate(),
+                order.getOrderType().toString(), order.getOrderStatus().toString(), order.getUser().getId()};
         jdbcTemplate.update(connection -> {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE_ORDER_INVENTORY, Statement.RETURN_GENERATED_KEYS);
             for (int i = 1; i <= orderParams.length; i++) {
@@ -74,7 +90,7 @@ public class JdbcOrderDao implements OrderDao {
     }
 
     @Override
-    public Long saveDeliveryOrder(Order order, Long addressId) {
+    public Long saveDeliveryOrderGuest(Order order, Long addressId) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         Object[] orderParams = new Object[]{order.getSubtotalPrice().multiply(BigDecimal.valueOf(100L)),
                 order.getDeliveryPrice().multiply(BigDecimal.valueOf(100L)),
@@ -83,7 +99,32 @@ public class JdbcOrderDao implements OrderDao {
                 order.getAdditionalInformation(), order.getCreatingDate(),
                 order.getOrderType().toString(), order.getOrderStatus().toString(), addressId};
         jdbcTemplate.update(connection -> {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE_ORDER_DELIVERY, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE_ORDER_DELIVERY_GUEST, Statement.RETURN_GENERATED_KEYS);
+            for (int i = 1; i <= orderParams.length; i++) {
+                preparedStatement.setObject(i, orderParams[i - 1]);
+            }
+            return preparedStatement;
+        }, keyHolder);
+        Long id = keyHolder.getKey().longValue();
+        List<OrderItem> orderItems = order.getOrderItems();
+        for (int i = 0; i < orderItems.size(); i++) {
+            jdbcTemplate.update(SQL_SAVE_ORDER_ITEM, orderItems.get(i).getProduct().getId(),
+                    id, orderItems.get(i).getQuantity());
+        }
+        return id;
+    }
+
+    @Override
+    public Long saveDeliveryOrderAuth(Order order, Long addressId) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        Object[] orderParams = new Object[]{order.getSubtotalPrice().multiply(BigDecimal.valueOf(100L)),
+                order.getDeliveryPrice().multiply(BigDecimal.valueOf(100L)),
+                order.getTotalPrice().multiply(BigDecimal.valueOf(100L)),
+                order.getFirstName(), order.getLastName(), order.getPhoneNumber(),
+                order.getAdditionalInformation(), order.getCreatingDate(),
+                order.getOrderType().toString(), order.getOrderStatus().toString(), addressId, order.getUser().getId()};
+        jdbcTemplate.update(connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE_ORDER_DELIVERY_AUTH, Statement.RETURN_GENERATED_KEYS);
             for (int i = 1; i <= orderParams.length; i++) {
                 preparedStatement.setObject(i, orderParams[i - 1]);
             }

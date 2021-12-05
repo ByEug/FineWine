@@ -1,4 +1,4 @@
-package com.finewine.core.inventory;
+package com.finewine.core.model.inventory;
 
 public class Inventory {
 

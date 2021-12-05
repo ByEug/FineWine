@@ -11,4 +11,6 @@ public interface CustomUserDao {
     Integer countByUsername(String username);
 
     Long save(CustomUser customUser, Long inventoryId);
+
+    void update(CustomUser customUser);
 }
