@@ -9,6 +9,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -60,6 +62,15 @@ public class InventoryServiceImpl implements InventoryService {
         });
         inventoryDao.update(customUser.getInventory().getOverallQuantity() + overallQuantity.get(),
                 customUser.getInventory().getId());
+    }
+
+    @Override
+    public List<InventoryItem> getInventoryItemsForUserInventory(Long inventoryId) {
+        if (inventoryItemDao.checkCountForInventory(inventoryId) > 0) {
+            return inventoryItemDao.getItemsForInventoryId(inventoryId);
+        } else {
+            return new ArrayList<>();
+        }
     }
 
 

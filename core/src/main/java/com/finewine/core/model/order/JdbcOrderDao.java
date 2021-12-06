@@ -36,7 +36,7 @@ public class JdbcOrderDao implements OrderDao {
             "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_SAVE_ORDER_ITEM = "insert into order_item (id_product, id_order, quantity) " +
             "values (?, ?, ?)";
-    private final String SQL_COUNT_BY_ID = "select count(*) from orders where id = %d";
+    private final String SQL_COUNT_BY_ID = "select count(*) from orders where id_user = %d";
     private final String SQL_SELECT_ORDERS_FOR_USER_ID = "select * from orders where id_user = %d";
 
     @Resource

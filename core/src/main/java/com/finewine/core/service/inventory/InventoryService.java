@@ -1,7 +1,10 @@
 package com.finewine.core.service.inventory;
 
 import com.finewine.core.model.inventory.Inventory;
+import com.finewine.core.model.inventory.InventoryItem;
 import com.finewine.core.model.order.Order;
+
+import java.util.List;
 
 public interface InventoryService {
 
@@ -10,4 +13,6 @@ public interface InventoryService {
     Inventory getById(Long id);
 
     void createInventoryItemsFromOrderItems(Order order, String username);
+
+    List<InventoryItem> getInventoryItemsForUserInventory(Long inventoryId);
 }

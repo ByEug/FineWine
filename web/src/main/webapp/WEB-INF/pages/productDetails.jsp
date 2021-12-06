@@ -57,6 +57,36 @@
             </div>
         </div>
     </div>
+    <h3>Comments:</h3>
+    <div class="vertical-divs">
+        <c:forEach items="${comments}" var="comment">
+            <div class="vertical-divs">
+                <div class="name-and-data">
+                    ${comment.user.username}
+                </div>
+                <div class="name-and-data">
+                    ${comment.creatingDate.toString()}
+                </div>
+                <div>
+                    ${comment.commentText}
+                </div>
+            </div>
+            <br>
+        </c:forEach>
+    </div>
+    <form:form method="post" action="${pageContext.request.contextPath}/productDetails/${product.id}" commandName="commentDTO">
+        <div class="items-inline">
+            <div>
+                <form:textarea path="commentText" id="add-info-to-order" name="commentText" placeholder="Add a comment..." maxlength="2000"/>
+            </div>
+            <div>
+                <button class="buttons">
+                    Add a comment
+                </button>
+            </div>
+        </div>
+    </form:form>
+    <br>
     <tags:footer/>
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script>
