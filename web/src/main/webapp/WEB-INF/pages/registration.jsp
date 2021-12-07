@@ -6,33 +6,76 @@
 
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <title>Registration</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/auth.css">
 </head>
 <body>
 <tags:headerLogin/>
-<h3>
-    Registration form:
-</h3>
+<%--<h3>--%>
+<%--    Registration form:--%>
+<%--</h3>--%>
+<%--<form:form method="post" action="${pageContext.request.contextPath}/registration" commandName="customUserDTO">--%>
+<%--    <div class="vertical-divs">--%>
+<%--        <div>--%>
+<%--            <tags:validationRow label="firstNameRegistration" id="first-name" name="clientName"/>--%>
+<%--        </div>--%>
+<%--        <div>--%>
+<%--            <tags:validationRow label="lastNameRegistration" id="last-name" name="clientSurname"/>--%>
+<%--        </div>--%>
+<%--        <div>--%>
+<%--            <tags:validationRow label="usernameRegistration" id="username" name="username"/>--%>
+<%--        </div>--%>
+<%--        <div>--%>
+<%--            <tags:validationRow label="passwordRegistration" id="password" name="password"/>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--    <br>--%>
+<%--    <button class="buttons">--%>
+<%--        Register--%>
+<%--    </button>--%>
+<%--</form:form>--%>
 <form:form method="post" action="${pageContext.request.contextPath}/registration" commandName="customUserDTO">
-    <div class="vertical-divs">
-        <div>
-            <tags:validationRow label="firstNameRegistration" id="first-name" name="clientName"/>
-        </div>
-        <div>
-            <tags:validationRow label="lastNameRegistration" id="last-name" name="clientSurname"/>
-        </div>
-        <div>
-            <tags:validationRow label="usernameRegistration" id="username" name="username"/>
-        </div>
-        <div>
-            <tags:validationRow label="passwordRegistration" id="password" name="password"/>
+<section class="forms-section">
+    <h1 class="section-title">Create account!</h1>
+    <div class="forms">
+        <div class="form-wrapper is-active">
+            <button type="button" class="switcher switcher-signup">
+                Sign Up
+                <span class="underline"></span>
+            </button>
+                <form class="form form-login">
+                    <fieldset>
+                        <div class="input-block">
+                            <tags:validationRow label="firstNameRegistration" id="first-name" name="clientName"/>
+                        </div>
+                        <div class="input-block">
+                            <tags:validationRow label="lastNameRegistration" id="last-name" name="clientSurname"/>
+                        </div>
+                        <div class="input-block">
+                            <tags:validationRow label="usernameRegistration" id="username" name="username"/>
+                        </div>
+                        <div class="input-block">
+                            <tags:validationRow label="passwordRegistration" id="password" name="password"/>
+                        </div>
+                    </fieldset>
+                    <button type="submit" class="btn-login" id="continue-signup">Continue</button>
+                </form>
+            <div class="section-title">
+                <h3>
+                    Do you already have an account?
+                    <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+                </h3>
+            </div>
         </div>
     </div>
-    <br>
-    <button class="buttons">
-        Register
-    </button>
+</section>
 </form:form>
+<tags:footer/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
 </html>
