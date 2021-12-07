@@ -83,6 +83,7 @@
             <c:if test="${currentOrderType == 'Delivery'}">
                 <th>Delivery address:</th>
             </c:if>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -90,22 +91,22 @@
             <th scope="row"><c:out value="${cart.totalCost}"/>$</th>
             <td><c:out value="${deliveryPrice}"/>$</td>
             <td><c:out value="${totalPrice}"/>$</td>
-            <td>
-                <div class="items-inline">
-                    <div><spring:theme code="firstNameOrder"/>:&nbsp</div>
-                    <div><c:out value="${order.firstName}"/></div>
-                </div>
-                <br>
-                <div class="items-inline">
-                    <div><spring:theme code="lastNameOrder"/>:&nbsp</div>
-                    <div><c:out value="${order.lastName}"/></div>
-                </div>
-                <br>
-                <div class="items-inline">
-                    <div><spring:theme code="phoneOrder"/>:&nbsp</div>
-                    <div><c:out value="${order.phoneNumber}"/></div>
-                </div>
-            </td>
+<%--            <td>--%>
+<%--                <div class="items-inline">--%>
+<%--                    <div><spring:theme code="firstNameOrder"/>:&nbsp</div>--%>
+<%--                    <div><c:out value="${order.firstName}"/></div>--%>
+<%--                </div>--%>
+<%--                <br>--%>
+<%--                <div class="items-inline">--%>
+<%--                    <div><spring:theme code="lastNameOrder"/>:&nbsp</div>--%>
+<%--                    <div><c:out value="${order.lastName}"/></div>--%>
+<%--                </div>--%>
+<%--                <br>--%>
+<%--                <div class="items-inline">--%>
+<%--                    <div><spring:theme code="phoneOrder"/>:&nbsp</div>--%>
+<%--                    <div><c:out value="${order.phoneNumber}"/></div>--%>
+<%--                </div>--%>
+<%--            </td>--%>
             <c:if test="${currentOrderType == 'Inventory'}">
                 <td>
                 <form:form method="post"
