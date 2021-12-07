@@ -63,7 +63,7 @@
                             <tags:validationRow label="passwordRegistration" id="password" name="password"/>
                         </div>
                     </fieldset>
-                    <button type="submit" class="btn-login" id="continue-signup">Continue</button>
+                    <button type="submit" class="btn-login">Continue</button>
                 </form>
             <div class="section-title">
                 <h3>
