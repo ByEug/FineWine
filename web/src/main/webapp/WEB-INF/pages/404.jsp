@@ -5,29 +5,32 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error 404</title>
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-          crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css">
 <body>
     <tags:header cart="${cart}"/>
-    <div class="white-box container">
-        <div style="text-align: center">
-            <img src="${pageContext.request.contextPath}/images/img404.jpg" style="max-width:600px; height:auto" alt='[]' />
-        </div>
-        <div style="text-align: center">
-            <a class="button" style="display: inline-block; margin: auto;" href="/productList">Go back to homepage</a>
-        </div>
+    <body>
+    <a href="${pageContext.request.contextPath}/productList" class="return">
+        <img
+                src="images/logon.png"
+                alt="Finewine"
+                title="Back to the home page"
+        />
+    </a>
+    <div class="numberError">
+        <h1 class="error" data-text="404">404</h1>
     </div>
-    <%--<h3>--%>
-    <%--    Error 404--%>
-    <%--</h3>--%>
-    <h2>
-        <c:if test="${not empty param.message}">
-            <c:out value="${param.message}"/>
-        </c:if>
-    </h2>
+    <h2 class="notFound">Page Not Found</h2>
+<%--    <p class="description">--%>
+<%--        The specified file was not found on this website. Please check the URL for--%>
+<%--        mistakes and try again.--%>
+<%--    </p>--%>
+<%--    <h2>--%>
+<%--        <c:if test="${not empty param.message}">--%>
+<%--            <c:out value="${param.message}"/>--%>
+<%--        </c:if>--%>
+<%--    </h2>--%>
     <tags:footer/>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    </body>
 </html>
