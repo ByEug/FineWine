@@ -16,29 +16,6 @@
 </head>
 <body>
 <tags:headerLogin/>
-<%--<h3>--%>
-<%--    Registration form:--%>
-<%--</h3>--%>
-<%--<form:form method="post" action="${pageContext.request.contextPath}/registration" commandName="customUserDTO">--%>
-<%--    <div class="vertical-divs">--%>
-<%--        <div>--%>
-<%--            <tags:validationRow label="firstNameRegistration" id="first-name" name="clientName"/>--%>
-<%--        </div>--%>
-<%--        <div>--%>
-<%--            <tags:validationRow label="lastNameRegistration" id="last-name" name="clientSurname"/>--%>
-<%--        </div>--%>
-<%--        <div>--%>
-<%--            <tags:validationRow label="usernameRegistration" id="username" name="username"/>--%>
-<%--        </div>--%>
-<%--        <div>--%>
-<%--            <tags:validationRow label="passwordRegistration" id="password" name="password"/>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    <br>--%>
-<%--    <button class="buttons">--%>
-<%--        Register--%>
-<%--    </button>--%>
-<%--</form:form>--%>
 <form:form method="post" action="${pageContext.request.contextPath}/registration" commandName="customUserDTO">
 <section class="forms-section">
     <h1 class="section-title">Create account!</h1>

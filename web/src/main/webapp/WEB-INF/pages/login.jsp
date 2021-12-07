@@ -14,40 +14,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/auth.css">
 <body>
     <tags:headerLogin/>
-<%--    <div id="login-error">--%>
-<%--        <c:if test="${not empty error}">--%>
-<%--            ${error}--%>
-<%--        </c:if>--%>
-<%--    </div>--%>
-<%--    <form name="form_login" action="<c:url value="/j_spring_security_check"/>" method="post">--%>
-<%--        <table class="no-border-table">--%>
-<%--            <tr>--%>
-<%--                <td class="no-border-td">Email:</td>--%>
-<%--                <td class="no-border-td">--%>
-<%--                    <input type="text" name="username_login" value="">--%>
-<%--                </td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td class="no-border-td">Password:</td>--%>
-<%--                <td class="no-border-td">--%>
-<%--                    <input type="password" name="password_login" value="">--%>
-<%--                </td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td class="no-border-td">--%>
-<%--                    <button class="buttons">--%>
-<%--                        Submit--%>
-<%--                    </button>--%>
-<%--                </td>--%>
-<%--            </tr>--%>
-<%--        </table>--%>
-<%--    </form>--%>
-<%--    <div>--%>
-<%--        <h3>--%>
-<%--            Still don't have an existing account?--%>
-<%--            <a href="${pageContext.request.contextPath}/registration">Create an account</a>--%>
-<%--        </h3>--%>
-<%--    </div>--%>
 
     <section class="forms-section">
         <h1 class="section-title">Sign in with email</h1>
@@ -82,7 +48,6 @@
     </section>
 
     <tags:footer/>
-<%--    <script src="${pageContext.request.contextPath}/scripts/auth.js"></script>--%>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
 </html>

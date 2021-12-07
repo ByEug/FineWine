@@ -21,15 +21,7 @@
         <h1 class="error" data-text="404">404</h1>
     </div>
     <h2 class="notFound">Page Not Found</h2>
-<%--    <p class="description">--%>
-<%--        The specified file was not found on this website. Please check the URL for--%>
-<%--        mistakes and try again.--%>
-<%--    </p>--%>
-<%--    <h2>--%>
-<%--        <c:if test="${not empty param.message}">--%>
-<%--            <c:out value="${param.message}"/>--%>
-<%--        </c:if>--%>
-<%--    </h2>--%>
+
     <tags:footer/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     </body>
