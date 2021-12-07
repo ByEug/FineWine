@@ -3,6 +3,11 @@ html {
     height: 100%;
 }
 
+h3 {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
@@ -76,15 +81,6 @@ a:hover {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-/*.ftco-footer-social{*/
-/*li{*/
-/*a{*/
-/*    background: transparent;*/
-/*    border: 1px solid primary;*/
-/*}*/
-/*}*/
-/*}*/
-
 
 
 #image {
@@ -193,14 +189,6 @@ a:hover {
     padding: 10px;
 }
 
-/*.buttons {*/
-/*    text-align: center;*/
-/*    border: 1px solid grey;*/
-/*    border-radius: 5px;*/
-/*    padding: 5px;*/
-/*    background: lightgrey;*/
-/*    transition: 0.2s;*/
-/*}*/
 
 .vertical-divs {
     display: flex;

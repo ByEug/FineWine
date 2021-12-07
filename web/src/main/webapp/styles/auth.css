@@ -30,31 +30,6 @@ section {
     margin-top: 30px;
 }
 
-/*.form-wrapper {*/
-/*    animation: hideLayer 0.3s ease-out forwards;*/
-/*}*/
-
-/*.form-wrapper.is-active {*/
-/*    animation: showLayer 0.3s ease-in forwards;*/
-/*}*/
-
-/*@keyframes showLayer {*/
-/*    50% {*/
-/*        z-index: 1;*/
-/*    }*/
-/*    100% {*/
-/*        z-index: 1;*/
-/*    }*/
-/*}*/
-
-/*@keyframes hideLayer {*/
-/*    0% {*/
-/*        z-index: 1;*/
-/*    }*/
-/*    49.999% {*/
-/*        z-index: 1;*/
-/*    }*/
-/*}*/
 
 .switcher {
     position: relative;
@@ -128,77 +103,6 @@ section {
     transform-origin: top;
 }
 
-/*.form-login {*/
-/*    animation: hideLogin 0.3s ease-out forwards;*/
-/*}*/
-
-/*.form-wrapper.is-active .form-login {*/
-/*    animation: showLogin 0.3s ease-in forwards;*/
-/*}*/
-
-/*@keyframes showLogin {*/
-/*    0% {*/
-/*        background: #d7e7f1;*/
-/*        transform: translate(40%, 10px);*/
-/*    }*/
-/*    50% {*/
-/*        transform: translate(0, 0);*/
-/*    }*/
-/*    100% {*/
-/*        background-color: #fff;*/
-/*        transform: translate(35%, -20px);*/
-/*    }*/
-/*}*/
-
-/*@keyframes hideLogin {*/
-/*    0% {*/
-/*        background-color: #fff;*/
-/*        transform: translate(35%, -20px);*/
-/*    }*/
-/*    50% {*/
-/*        transform: translate(0, 0);*/
-/*    }*/
-/*    100% {*/
-/*        background: #d7e7f1;*/
-/*        transform: translate(40%, 10px);*/
-/*    }*/
-/*}*/
-
-/*.form-signup {*/
-/*    animation: hideSignup 0.3s ease-out forwards;*/
-/*}*/
-
-/*.form-wrapper.is-active .form-signup {*/
-/*    animation: showSignup 0.3s ease-in forwards;*/
-/*}*/
-
-/*@keyframes showSignup {*/
-/*    0% {*/
-/*        background: #d7e7f1;*/
-/*        transform: translate(-40%, 10px) scaleY(0.8);*/
-/*    }*/
-/*    50% {*/
-/*        transform: translate(0, 0) scaleY(0.8);*/
-/*    }*/
-/*    100% {*/
-/*        background-color: #fff;*/
-/*        transform: translate(-35%, -20px) scaleY(1);*/
-/*    }*/
-/*}*/
-
-/*@keyframes hideSignup {*/
-/*    0% {*/
-/*        background-color: #fff;*/
-/*        transform: translate(-35%, -20px) scaleY(1);*/
-/*    }*/
-/*    50% {*/
-/*        transform: translate(0, 0) scaleY(0.8);*/
-/*    }*/
-/*    100% {*/
-/*        background: #d7e7f1;*/
-/*        transform: translate(-40%, 10px) scaleY(0.8);*/
-/*    }*/
-/*}*/
 
 .form fieldset {
     position: relative;

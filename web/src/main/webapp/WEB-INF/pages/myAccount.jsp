@@ -46,6 +46,7 @@
                 <h3>Your funds: </h3>
                 <h2>${customUser.currentFundsBalance}$</h2>
             </div>
+            <br>
             <div class="items-inline">
                 <form:form method="post" action="${pageContext.request.contextPath}/myAccount" commandName="addFundsDTO">
                     <tags:validationRow label="addFunds" id="add-funds" name="funds"/>

@@ -81,29 +81,6 @@
             </section>
         </div>
     </section>
-<%--                <div class="row">--%>
-<%--            <c:forEach var="product" items="${products}">--%>
-<%--                <div class="col-md-4">--%>
-<%--                    <div>--%>
-<%--                        <img id="image" src="${product.picturePath}">--%>
-<%--                        <a href="${pageContext.request.contextPath}/productDetails/${product.id}"><h3>${product.productName}</h3></a>--%>
-<%--                        <p>${product.country.englishName}</p>--%>
-<%--                        <p>${product.creatingDate}</p>--%>
-<%--                        <p>Price: ${product.price}$</p>--%>
-<%--                        <p>Stock: ${product.stock.stock}</p>--%>
-<%--                    </div>--%>
-<%--                    <div>--%>
-<%--                        <span>--%>
-<%--                            <c:forEach var="category" items="${product.categories}">--%>
-<%--                                <p>${category.categoryName}</p>--%>
-<%--                            </c:forEach>--%>
-<%--                        </span>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-
-<%--            </c:forEach>--%>
-<%--        </div>--%>
-<%--    </div>--%>
 
     <tags:footer/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>

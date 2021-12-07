@@ -38,35 +38,6 @@
             </div>
         </div>
     </c:if>
-<%--    <c:if test="${empty isEmpty}">--%>
-<%--        <form:form id="update-form" method="post" action="${pageContext.request.contextPath}/cart" commandName="productArrayDTO">--%>
-<%--            <div id="vertical-products-cart">--%>
-<%--                <c:forEach var="i" begin="0" end="${cart.cartItems.size() - 1}">--%>
-
-
-
-<%--                    <div id="horizontal-cart">--%>
-<%--                        <div><img id="image" src="${cart.cartItems.get(i).product.picturePath}"></div>--%>
-<%--                        <div><c:out value="${cart.cartItems.get(i).product.productName}"/></div>--%>
-<%--                        <div><c:out value="${cart.cartItems.get(i).product.price}"/>$</div>--%>
-<%--                        <div>--%>
-<%--                            <form:input path="productDTOItems[${i}].id" type="hidden"/>--%>
-<%--                            <form:input path="productDTOItems[${i}].quantity"/>--%>
-<%--                            <br>--%>
-<%--                            <form:errors path="productDTOItems[${i}].quantity" cssClass="red-res"/>--%>
-<%--                            <span class="green-res"><c:out value="${fn:contains(updatedProductIds, cart.cartItems.get(i).product.id) ? successfulUpdateMessage : ''}"/></span>--%>
-<%--                        </div>--%>
-<%--                        <div>--%>
-<%--                            <button class="buttons" formmethod="post" formaction="${pageContext.request.contextPath}/cart/${cart.cartItems.get(i).product.id}">--%>
-<%--                                Delete from cart--%>
-<%--                            </button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </c:forEach>--%>
-<%--            </div>--%>
-<%--        </form:form>--%>
-
-<%--    </c:if>--%>
 
     <c:if test="${empty isEmpty}">
         <div class="title">
