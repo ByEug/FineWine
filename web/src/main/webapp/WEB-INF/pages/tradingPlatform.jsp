@@ -88,7 +88,7 @@
                 </th>
                 <td>
                     <div>
-                        Seller: ${customUser.username}
+                        Seller: ${auction.seller.username}
                     </div>
                     <div>
                         <c:out value="${auction.inventoryItem.product.productName}"/>
