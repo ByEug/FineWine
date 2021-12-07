@@ -7,18 +7,38 @@
 
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+          integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <title>User orders</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css">
 </head>
 <body>
 <tags:header cart="${cart}"/>
-<h2><c:out value="${customUser.username}"/> account</h2>
-<div class="vertical-divs">
-    <c:forEach var="order" items="${userOrders}">
-        <div>
-            <a href="${pageContext.request.contextPath}/orderOverview/${order.id}">Order №<c:out value="${order.id}"/></a>
+<div class="title">
+    <div class="row">
+        <div class="col align-self-center">
+            <h2><b><c:out value="${customUser.clientName} ${customUser.clientSurname}"/> account</b></h2>
+            <div class="vertical-divs">
+                <c:forEach var="order" items="${userOrders}">
+                    <div>
+                        <h6><a class="nav-link link-success orders" href="${pageContext.request.contextPath}/orderOverview/${order.id}">Order №<c:out
+                                value="${order.id}"/></a></h6>
+                    </div>
+                </c:forEach>
+            </div>
         </div>
-    </c:forEach>
+    </div>
+
 </div>
+
+<tags:footer/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
 </body>
 </html>

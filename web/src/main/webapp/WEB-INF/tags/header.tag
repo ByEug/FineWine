@@ -93,7 +93,7 @@
 <%--                    <a class="nav-link" href="#">Home</a>--%>
 <%--                </li>--%>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: #a43300">Catalog</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/productList" style="color: #a43300">Catalog</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color: #a43300">News</a>
@@ -101,7 +101,7 @@
             </ul>
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <security:authorize access="isAuthenticated()">--%>
+                <security:authorize access="isAuthenticated()">
                     <li class="nav-item">
                         <span class="navbar-brand"><security:authentication property="name"/></span>
                     </li>
@@ -110,12 +110,17 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="" alt="Account"><i class="far fa-user"></i></a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <security:authorize access="!isAuthenticated()">
-<%--                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/registration"></a></li>--%>
-                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/login">Account</a></li>
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/registration">Sign up</a></li>
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/login">Login</a></li>
                         </security:authorize>
                         <security:authorize access="isAuthenticated()">
-                            <li><a class="dropdown-item" id="logout" href="<c:url value="/j_spring_security_logout"/>"></a>logout</li>
-                                <li><a class="dropdown-item href="${pageContext.request.contextPath}/myAccount"></a>Profile</li>
+                            <li>
+                                <a class="dropdown-item" id="logout" href="<c:url value="/j_spring_security_logout"/>">Logout</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="${pageContext.request.contextPath}/myAccount">Profile
+                                </a>
+                            </li>
                         </security:authorize>
                     </ul>
                 </li>
@@ -164,9 +169,9 @@
 <%--                    </div>--%>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
-                </li>
+<%--                <li class="nav-item">--%>
+<%--                    <a class="nav-link" href="#"><i class="fas fa-search"></i></a>--%>
+<%--                </li>--%>
             </ul>
         </div>
     </div>

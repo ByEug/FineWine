@@ -50,7 +50,7 @@
                 <div class="col-lg-4 col-sm-6 mb-3">
                     <div class="product-card">
                         <div class="product-thumb">
-                            <a href="#"><img src="${product.picturePath}" alt=""></a>
+                            <a href="${pageContext.request.contextPath}/productDetails/${product.id}"><img src="${product.picturePath}" alt=""></a>
                         </div>
                         <div class="product-details">
                             <h4><a href="${pageContext.request.contextPath}/productDetails/${product.id}">${product.productName}</a></h4>

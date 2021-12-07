@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<%--    <title>Log in</title>--%>
+    <title>Log in</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/auth.css">
 <body>
@@ -62,56 +62,27 @@
                         <legend>Please, enter your email and password for login.</legend>
                         <div class="input-block">
                             <label for="login-email">E-mail</label>
-                            <input id="login-email" type="email" required />
+                            <input id="login-email" name="username_login" type="text" required />
                         </div>
                         <div class="input-block">
                             <label for="login-password">Password</label>
-                            <input id="login-password" type="password" required />
+                            <input id="login-password" name="password_login" type="password" required />
                         </div>
                     </fieldset>
                     <button type="submit" class="btn-login">Login</button>
                 </form>
-            </div>
-            <div class="form-wrapper">
-                <button type="button" class="switcher switcher-signup">
-                    Sign Up
-                    <span class="underline"></span>
-                </button>
-                <form class="form form-signup"method="post" action="${pageContext.request.contextPath}/registration" commandName="customUserDTO">
-                    <fieldset>
-                        <legend>
-                            Please, enter your email, password and password confirmation for
-                            sign up.
-                        </legend>
-                        <div class="input-block">
-                            <label for="signup-email">First name</label>
-                            <input id="signup-name" type="text" required />
-                        </div>
-                        <div class="input-block">
-                            <label for="signup-email">Last name</label>
-                            <input id="signup-surname" type="text" required />
-                        </div>
-                        <div class="input-block">
-                            <label for="signup-email">E-mail</label>
-                            <input id="signup-email" type="email" required />
-                        </div>
-                        <div class="input-block">
-                            <label for="signup-password">Password</label>
-                            <input id="signup-password" type="password" required />
-                        </div>
-                        <div class="input-block">
-                            <label for="signup-password-confirm">Confirm password</label>
-                            <input id="signup-password-confirm" type="password" required />
-                        </div>
-                    </fieldset>
-                    <button type="submit" class="btn-signup">Continue</button>
-                </form>
+                <div class="section-title">
+                    <h3>
+                        Still don't have an existing account?
+                        <a class="nav-link" href="${pageContext.request.contextPath}/registration">Create an account</a>
+                    </h3>
+                </div>
             </div>
         </div>
     </section>
 
     <tags:footer/>
-    <script src="${pageContext.request.contextPath}/scripts/auth.js"></script>
+<%--    <script src="${pageContext.request.contextPath}/scripts/auth.js"></script>--%>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -9,11 +9,11 @@
 <%--    <h3>@ Belarusian State University of Informatics and Radioelectronics</h3>--%>
 <%--</div>--%>
 
-<footer class="footer">
+<footer class="footer" role="contentinfo">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12 text-center">
-                <h2 class="footer-heading"><a href="#" class="logo">FineWine</a></h2>
+                <h2 class="footer-heading"><a href="${pageContext.request.contextPath}/productList" class="logo">FineWine</a></h2>
                 <p class="menu">
                     <a href="#">Home</a>
                     <a href="#">Agent</a>
