@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <title>${product.productName}</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/comment.css">
 </head>
 <body>
     <tags:header cart="${cart}"/>
@@ -43,16 +44,7 @@
                         <p id="description-pdp">${product.description}</p>
                     </div>
                 </div>
-                <%--            <img id="image-pdp" src="${product.picturePath}">--%>
-                <%--            <div class="items-inline">--%>
-                <%--                <p>Year made: </p><p>&nbsp${product.yearMade}</p>--%>
-                <%--            </div>--%>
-                <%--            <div class="items-inline">--%>
-                <%--                <p>Country: </p><p>&nbsp${product.country.englishName}</p>--%>
-                <%--            </div>--%>
-                <%--            <div class="items-inline">--%>
-                <%--                <p id="description-pdp">${product.description}</p>--%>
-                <%--            </div>--%>
+
             </div>
             <div class="col-lg-4">
                 <div class="product-card">
@@ -80,63 +72,58 @@
                     </div>
                 </div>
             </div>
-<%--            <div id="vertical-pdp-right">--%>
-<%--                <div class="items-inline">--%>
-<%--                    <p>Available in stock: </p><p>&nbsp${product.stock.stock}</p>--%>
-<%--                </div>--%>
-<%--                <div class="items-inline">--%>
-<%--                    <p>Price: </p><p>&nbsp${product.price}$</p>--%>
-<%--                </div>--%>
-<%--                <div id="add-to-cart-form">--%>
-<%--                    <form:form id="addToCartForm" method="post" modelAttribute="productDTO">--%>
-<%--                        <input class="quantity-input" type="text" id="quantity" name="quantity" value="1"/>--%>
-<%--                        <button class="buttons">--%>
-<%--                            Add to Cart--%>
-<%--                        </button>--%>
-<%--                        <input id="productId" name="productId" type="hidden" value="${product.id}"/>--%>
-<%--                        <div id="result-green">--%>
-<%--                        </div>--%>
-<%--                        <div id="result-red">--%>
-<%--                        </div>--%>
-<%--                    </form:form>--%>
-<%--                </div>--%>
-<%--            </div>--%>
         </div>
     </div>
 
-<%--    <div id="success-result">--%>
-<%--    </div>--%>
 
-    <h3>Comments:</h3>
-    <div class="vertical-divs">
-        <c:forEach items="${comments}" var="comment">
-            <div class="vertical-divs">
-                <div class="name-and-data">
-                    ${comment.user.username}
+    <h3>Comments</h3>
+
+    <section class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-body">
+                        <form:form method="post"
+                                   action="${pageContext.request.contextPath}/productDetails/${product.id}"
+                                   commandName="commentDTO">
+                            <div>
+                                <form:textarea cssClass="form-control" rows="2" path="commentText" id="add-info-to-order" name="commentText"
+                                               placeholder="Add a comment..." maxlength="2000"/>
+                            </div>
+                            <div class="mar-top clearfix">
+                                <button class="btn btn-sm btn-primary pull-right" type="submit"><i
+                                        class="fa fa-pencil fa-fw"></i> Добавить
+                                </button>
+                            </div>
+                        </form:form>
+                    </div>
                 </div>
-                <div class="name-and-data">
-                    ${comment.creatingDate.toString()}
-                </div>
-                <div>
-                    ${comment.commentText}
+                <div class="panel">
+                    <div class="panel-body">
+                        <c:forEach items="${comments}" var="comment">
+                            <!-- Комментарий -->
+                            <div class="media-block">
+                                <div class="media-body">
+                                    <div class="mar-btm">
+                                        <a href=""
+                                           class="btn-link text-semibold media-heading box-inline">${comment.user.username}</a>
+                                        <p class="text-muted text-sm"><i
+                                                class="fa fa-lg"></i> ${comment.creatingDate.toString()}</p>
+                                    </div>
+                                    <p>${comment.commentText}</p>
+                                    <hr>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
-            <br>
-        </c:forEach>
-    </div>
-    <form:form method="post" action="${pageContext.request.contextPath}/productDetails/${product.id}" commandName="commentDTO">
-        <div class="items-inline">
-            <div>
-                <form:textarea path="commentText" id="add-info-to-order" name="commentText" placeholder="Add a comment..." maxlength="2000"/>
-            </div>
-            <div>
-                <button class="buttons">
-                    Add a comment
-                </button>
-            </div>
+
         </div>
-    </form:form>
-    <br>
+    </section>
+
+
     <tags:footer/>
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script>

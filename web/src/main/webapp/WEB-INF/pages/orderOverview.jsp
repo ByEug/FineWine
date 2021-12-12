@@ -113,66 +113,6 @@
         </tbody>
     </table>
 
-<%--    <div class="vertical-divs">--%>
-<%--        <div class="items-inline">--%>
-<%--            <div><spring:theme code="subtotalOrder"/>&nbsp</div>--%>
-<%--            <div><c:out value="${order.subtotalPrice}"/>$</div>--%>
-<%--        </div>--%>
-<%--        <div class="items-inline">--%>
-<%--            <div><spring:theme code="deliveryOrder"/>&nbsp</div>--%>
-<%--            <div><c:out value="${order.deliveryPrice}"/>$</div>--%>
-<%--        </div>--%>
-<%--        <div class="items-inline">--%>
-<%--            <div><spring:theme code="totalOrder"/>&nbsp</div>--%>
-<%--            <div><c:out value="${order.totalPrice}"/>$</div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    <div id="horizontal-order-overview">--%>
-<%--        <div class="vertical-divs">--%>
-<%--            <div>--%>
-<%--                <h4>Customer data:</h4>--%>
-<%--            </div>--%>
-<%--            <div class="items-inline">--%>
-<%--                <div><spring:theme code="firstNameOrder"/>:&nbsp</div>--%>
-<%--                <div><c:out value="${order.firstName}"/></div>--%>
-<%--            </div>--%>
-<%--            <div class="items-inline">--%>
-<%--                <div><spring:theme code="lastNameOrder"/>:&nbsp</div>--%>
-<%--                <div><c:out value="${order.lastName}"/></div>--%>
-<%--            </div>--%>
-<%--            <div class="items-inline">--%>
-<%--                <div><spring:theme code="phoneOrder"/>:&nbsp</div>--%>
-<%--                <div><c:out value="${order.phoneNumber}"/></div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <c:if test="${order.address != null}">--%>
-<%--            <div class="vertical-divs">--%>
-<%--                <div>--%>
-<%--                    <h4>Address:</h4>--%>
-<%--                </div>--%>
-<%--                <div class="items-inline">--%>
-<%--                    <div><spring:theme code="countryOrder"/>:&nbsp</div>--%>
-<%--                    <div><c:out value="${order.address.country.englishName}"/></div>--%>
-<%--                </div>--%>
-<%--                <div class="items-inline">--%>
-<%--                    <div><spring:theme code="localityOrder"/>:&nbsp</div>--%>
-<%--                    <div><c:out value="${order.address.locality}"/></div>--%>
-<%--                </div>--%>
-<%--                <div class="items-inline">--%>
-<%--                    <div><spring:theme code="streetOrder"/>:&nbsp</div>--%>
-<%--                    <div><c:out value="${order.address.street}"/></div>--%>
-<%--                </div>--%>
-<%--                <div class="items-inline">--%>
-<%--                    <div><spring:theme code="homeNumberOrder"/>:&nbsp</div>--%>
-<%--                    <div><c:out value="${order.address.homeNumber}"/></div>--%>
-<%--                </div>--%>
-<%--                <div class="items-inline">--%>
-<%--                    <div><spring:theme code="flatNumberOrder"/>:&nbsp</div>--%>
-<%--                    <div><c:out value="${order.address.flatNumber}"/></div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </c:if>--%>
-<%--    </div>--%>
     <div class="title">
         <div class="row">
             <div class="col align-self-center">
