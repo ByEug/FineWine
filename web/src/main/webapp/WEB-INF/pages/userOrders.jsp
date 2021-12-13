@@ -24,10 +24,10 @@
         <div class="col align-self-center">
             <h2><b><c:out value="${customUser.clientName} ${customUser.clientSurname}"/> account</b></h2>
             <div class="vertical-divs">
-                <c:forEach var="order" items="${userOrders}">
+                <c:forEach var="user" items="${userOrders}">
                     <div>
-                        <h6><a class="nav-link link-success orders" href="${pageContext.request.contextPath}/orderOverview/${order.id}">Order №<c:out
-                                value="${order.id}"/></a></h6>
+                        <h6><a class="nav-link link-success orders" href="${pageContext.request.contextPath}/orderOverview/${user.id}">Order №<c:out
+                                value="${user.id}"/></a></h6>
                     </div>
                 </c:forEach>
             </div>

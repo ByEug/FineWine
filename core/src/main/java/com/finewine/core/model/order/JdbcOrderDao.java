@@ -38,6 +38,8 @@ public class JdbcOrderDao implements OrderDao {
             "values (?, ?, ?)";
     private final String SQL_COUNT_BY_ID = "select count(*) from orders where id_user = %d";
     private final String SQL_SELECT_ORDERS_FOR_USER_ID = "select * from orders where id_user = %d";
+    private final String SQL_SELECT_ORDERS = "select * from orders";
+    private final String SQL_UPDATE_ORDER_STATUS = "update orders set order_status = '%s' where id = %d";
 
     @Resource
     private JdbcTemplate jdbcTemplate;
@@ -137,6 +139,16 @@ public class JdbcOrderDao implements OrderDao {
                     id, orderItems.get(i).getQuantity());
         }
         return id;
+    }
+
+    @Override
+    public List<Order> getAllOrders() {
+        return jdbcTemplate.query(SQL_SELECT_ORDERS, new OrderBeanPropertyRowMapper());
+    }
+
+    @Override
+    public void updateOrderStatus(Long orderId, OrderStatus status) {
+        jdbcTemplate.update(String.format(SQL_UPDATE_ORDER_STATUS, status.toString(), orderId));
     }
 
     private final class OrderBeanPropertyRowMapper extends BeanPropertyRowMapper<Order> {

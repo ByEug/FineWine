@@ -19,8 +19,10 @@ import java.util.Optional;
 public class JdbcAddressDao implements AddressDao {
 
     private final String SQL_SELECT_FOR_FIND_BY_ID = "select * from address where id = ";
-    private static final String SQL_SAVE_ADDRESS = "insert into address (locality, street, home_number, flat_number," +
+    private final String SQL_SAVE_ADDRESS = "insert into address (locality, street, home_number, flat_number," +
             " id_country) values (?, ?, ?, ?, ?)";
+    private final String SQL_SAVE_ADDRESS_TO_USER = "insert into " +
+            "user2address (id_user, id_address) values (?, ?)";
 
     @Resource
     private JdbcTemplate jdbcTemplate;
@@ -46,6 +48,22 @@ public class JdbcAddressDao implements AddressDao {
             }
             return preparedStatement;
         }, keyHolder);
+        return keyHolder.getKey().longValue();
+    }
+
+    @Override
+    public Long saveAddressForUser(Address address, Long countryId, Long userId) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        Object[] addressParams = new Object[]{address.getLocality(), address.getStreet(), address.getHomeNumber(),
+                address.getFlatNumber(), countryId};
+        jdbcTemplate.update(connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE_ADDRESS, Statement.RETURN_GENERATED_KEYS);
+            for (int i = 1; i <= addressParams.length; i++) {
+                preparedStatement.setObject(i, addressParams[i - 1]);
+            }
+            return preparedStatement;
+        }, keyHolder);
+        jdbcTemplate.update(SQL_SAVE_ADDRESS_TO_USER, userId, keyHolder.getKey().longValue());
         return keyHolder.getKey().longValue();
     }
 

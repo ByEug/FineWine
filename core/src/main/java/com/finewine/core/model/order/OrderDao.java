@@ -16,4 +16,8 @@ public interface OrderDao {
     Long saveDeliveryOrderGuest(Order order, Long addressId);
 
     Long saveDeliveryOrderAuth(Order order, Long addressId);
+
+    List<Order> getAllOrders();
+
+    void updateOrderStatus(Long orderId, OrderStatus status);
 }

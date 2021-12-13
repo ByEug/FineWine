@@ -1,8 +1,11 @@
 package com.finewine.core.model.user;
 
+import com.finewine.core.model.address.Address;
 import com.finewine.core.model.inventory.Inventory;
+import com.finewine.core.model.role.Role;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 public class CustomUser {
 
@@ -14,6 +17,8 @@ public class CustomUser {
     private BigDecimal currentFundsBalance;
     private Boolean enabled;
     private Inventory inventory;
+    private Set<Role> roles;
+    private Set<Address> addresses;
 
     public Long getId() {
         return id;
@@ -77,5 +82,21 @@ public class CustomUser {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
     }
 }

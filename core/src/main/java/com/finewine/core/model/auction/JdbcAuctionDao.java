@@ -34,6 +34,7 @@ public class JdbcAuctionDao implements AuctionDao {
     private final String SQL_UPDATE_CLOSE = "update auction set cancelling_date = '%s', auc_status = '%s' where id_inventory_item = %d";
     private final String SQL_CHECK_LIVE = "select count(*) from auction where auc_status = 'Live'";
     private final String SQL_SELECT_LIVE_AUCTIONS = "select * from auction where auc_status = 'Live'";
+    private final String SQL_SELECT_FOR_FIND_BY_ID = "select * from auction where id = ";
     private final String SQL_SELECT_FOR_FIND_BY_ITEM_ID = "select * from auction where auc_status = 'Live' and id_inventory_item = ";
     private final String SQL_UPDATE_BUY = "update auction set completing_date = '%s', auc_status = '%s', id_buyer = %d " +
             "where auc_status = 'Live' and id_inventory_item = %d";
@@ -67,6 +68,12 @@ public class JdbcAuctionDao implements AuctionDao {
     @Override
     public List<Auction> getAllLiveAuctions() {
         return jdbcTemplate.query(SQL_SELECT_LIVE_AUCTIONS, new AuctionBeanPropertyRowMapper());
+    }
+
+    @Override
+    public Optional<Auction> getById(Long Id) {
+        return Optional.ofNullable(jdbcTemplate.queryForObject(SQL_SELECT_FOR_FIND_BY_ID + Id,
+                new AuctionBeanPropertyRowMapper()));
     }
 
     @Override

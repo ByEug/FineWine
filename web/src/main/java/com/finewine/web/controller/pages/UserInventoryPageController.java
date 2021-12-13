@@ -3,6 +3,7 @@ package com.finewine.web.controller.pages;
 import com.finewine.core.model.cart.Cart;
 import com.finewine.core.model.form.AddToMarketDTO;
 import com.finewine.core.model.inventory.InventoryItem;
+import com.finewine.core.model.logs.inventory.InventoryLog;
 import com.finewine.core.model.user.CustomUser;
 import com.finewine.core.service.auction.AuctionService;
 import com.finewine.core.service.cart.CartService;

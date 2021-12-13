@@ -93,11 +93,12 @@
         </div>
         <form id="to-order-form" action="${pageContext.request.contextPath}/order?orderType=Delivery">
             <div class="items-inline">
-                <label for="order-type">Choose order type:&nbsp</label><select name="orderType" id="order-type">
+                <label for="order-type">Choose order type:&nbsp</label>
+                <select name="orderType" id="order-type">
                 <c:forEach items="${orderTypes}" var="orderType">
                     <option>${orderType.name()}</option>
                 </c:forEach>
-            </select>
+                </select>
                 &nbsp
                 <button class="btn btn-success" id="order-cart" form="to-order-form">
                     Order

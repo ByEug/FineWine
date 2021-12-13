@@ -7,7 +7,7 @@ public interface InventoryItemDao {
 
     Optional<InventoryItem> findById(Long id);
 
-    void save(Long stockId, Long productId, Long inventoryId);
+    Long save(Long stockId, Long productId, Long inventoryId);
 
     List<InventoryItem> getItemsForInventoryId(Long inventoryId);
 

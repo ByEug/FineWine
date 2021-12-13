@@ -86,8 +86,8 @@ public class OrderServiceImpl implements OrderService {
         order.getAddress().setCountry(country);
         updateStocks(order);
         order.setCreatingDate(Date.valueOf(LocalDate.now()));
-        Long id = addressService.saveAddress(order.getAddress(), country.getId());
         CustomUser customUser = customUserService.findByUsername(username);
+        Long id = addressService.saveAddressForUser(order.getAddress(), country.getId(), customUser.getId());
         order.setUser(customUser);
         return orderDao.saveDeliveryOrderAuth(order, id);
     }
@@ -110,5 +110,15 @@ public class OrderServiceImpl implements OrderService {
         order.setCreatingDate(Date.valueOf(LocalDate.now()));
         Long id = addressService.saveAddress(order.getAddress(), country.getId());
         return orderDao.saveDeliveryOrderGuest(order, id);
+    }
+
+    @Override
+    public List<Order> getAllOrders() {
+        return orderDao.getAllOrders();
+    }
+
+    @Override
+    public void updateOrderStatus(Long orderId, OrderStatus status) {
+        orderDao.updateOrderStatus(orderId, status);
     }
 }

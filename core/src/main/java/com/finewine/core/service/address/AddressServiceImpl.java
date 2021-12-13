@@ -16,4 +16,9 @@ public class AddressServiceImpl implements AddressService {
     public Long saveAddress(Address address, Long countryId) {
         return addressDao.saveAddress(address, countryId);
     }
+
+    @Override
+    public Long saveAddressForUser(Address address, Long countryId, Long userId) {
+        return addressDao.saveAddressForUser(address, countryId, userId);
+    }
 }

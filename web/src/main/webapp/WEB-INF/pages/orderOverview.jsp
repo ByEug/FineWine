@@ -29,10 +29,10 @@
                 <div class="col-lg-4 col-sm-6 mb-3">
                     <div class="product-card">
                         <div class="product-thumb">
-                            <a href="${pageContext.request.contextPath}/productDetails/${product.id}"><img src="${order.orderItems.get(i).product.picturePath}" alt=""></a>
+                            <a href="${pageContext.request.contextPath}/productDetails/${order.orderItems.get(i).product.id}"><img src="${order.orderItems.get(i).product.picturePath}" alt=""></a>
                         </div>
                         <div class="product-details">
-                            <h4><a href="${pageContext.request.contextPath}/productDetails/${product.id}"><c:out value="${order.orderItems.get(i).product.productName}"/></a></h4>
+                            <h4><a href="${pageContext.request.contextPath}/productDetails/${order.orderItems.get(i).product.id}"><c:out value="${order.orderItems.get(i).product.productName}"/></a></h4>
                             <div class="product-bottom-details d-flex justify-content-between">
                                 <div class="product-price">
                                     <c:out value="${order.orderItems.get(i).product.price}"/>$

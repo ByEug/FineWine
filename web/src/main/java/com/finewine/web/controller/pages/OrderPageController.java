@@ -3,14 +3,18 @@ package com.finewine.web.controller.pages;
 import com.finewine.core.exception.NoSuchOrderTypeException;
 import com.finewine.core.model.cart.Cart;
 import com.finewine.core.model.country.Country;
+import com.finewine.core.model.logs.order.OrderCreatingLog;
 import com.finewine.core.model.order.Order;
 import com.finewine.core.model.order.OrderFullDataDTO;
 import com.finewine.core.model.order.OrderType;
 import com.finewine.core.model.order.PreOrderDataDTO;
+import com.finewine.core.model.user.CustomUser;
 import com.finewine.core.service.cart.CartService;
 import com.finewine.core.service.country.CountryService;
 import com.finewine.core.service.inventory.InventoryService;
+import com.finewine.core.service.logs.order.OrderCreatingLogService;
 import com.finewine.core.service.order.OrderService;
+import com.finewine.core.service.user.CustomUserService;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +26,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -45,6 +51,12 @@ public class OrderPageController {
 
     @Resource
     private InventoryService inventoryService;
+
+    @Resource
+    private OrderCreatingLogService orderCreatingLogService;
+
+    @Resource
+    private CustomUserService customUserService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getOrder(@RequestParam(required = false) String orderType, Principal principal, Model model) {
@@ -124,6 +136,12 @@ public class OrderPageController {
         Order createdOrder = orderService.getOrder(id.toString());
         inventoryService.createInventoryItemsFromOrderItems(createdOrder, principal.getName());
         cartService.deleteCart(httpSession);
+        OrderCreatingLog orderCreatingLog = new OrderCreatingLog();
+        orderCreatingLog.setCreatingDate(Date.valueOf(LocalDate.now()));
+        orderCreatingLog.setOrderType(OrderType.Inventory);
+        orderCreatingLog.setOrder(createdOrder);
+        CustomUser customUser = customUserService.findByUsername(principal.getName());
+        orderCreatingLogService.save(orderCreatingLog, customUser.getId());
         return "redirect:/orderOverview/" + id;
     }
 
@@ -132,6 +150,13 @@ public class OrderPageController {
         Long deliveryPrice = Long.parseLong(env.getProperty("delivery.price"));
         if (principal != null) {
             id = orderService.createDeliveryPreOrderForAuth(cart, orderFullDataDTO, deliveryPrice, principal.getName());
+            Order createdOrder = orderService.getOrder(id.toString());
+            OrderCreatingLog orderCreatingLog = new OrderCreatingLog();
+            orderCreatingLog.setCreatingDate(Date.valueOf(LocalDate.now()));
+            orderCreatingLog.setOrderType(OrderType.Delivery);
+            orderCreatingLog.setOrder(createdOrder);
+            CustomUser customUser = customUserService.findByUsername(principal.getName());
+            orderCreatingLogService.save(orderCreatingLog, customUser.getId());
         } else {
             id = orderService.createDeliveryPreOrderForGuest(cart, orderFullDataDTO, deliveryPrice);
         }
