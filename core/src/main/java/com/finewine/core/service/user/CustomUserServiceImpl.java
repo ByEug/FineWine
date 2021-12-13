@@ -3,6 +3,7 @@ package com.finewine.core.service.user;
 import com.finewine.core.exception.EmailAlreadyRegisteredException;
 import com.finewine.core.exception.NoElementWithSuchIdException;
 import com.finewine.core.model.inventory.Inventory;
+import com.finewine.core.model.role.Role;
 import com.finewine.core.model.user.CustomUser;
 import com.finewine.core.model.user.CustomUserBuilder;
 import com.finewine.core.model.user.CustomUserDTO;
@@ -12,6 +13,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -56,6 +58,44 @@ public class CustomUserServiceImpl implements CustomUserService {
     @Override
     public void update(CustomUser customUser) {
         customUserDao.update(customUser);
+    }
+
+    @Override
+    public void updateRole(CustomUser customUser, Role role) {
+        customUserDao.updateRole(customUser, role);
+    }
+
+    @Override
+    public void deleteUser(String id) {
+        try {
+            long longId;
+            longId = Long.parseLong(id);
+            customUserDao.deleteUser(longId);
+        } catch (NumberFormatException | EmptyResultDataAccessException e) {
+            throw new NoElementWithSuchIdException(id);
+        }
+    }
+
+    @Override
+    public List<CustomUser> getAllUsers() {
+        return customUserDao.getAllUsers();
+    }
+
+    @Override
+    public CustomUser findById(String id) {
+        Optional<CustomUser> customUser;
+        try {
+            long longId;
+            longId = Long.parseLong(id);
+            customUser = customUserDao.findById(longId);
+        } catch (NumberFormatException | EmptyResultDataAccessException e) {
+            throw new NoElementWithSuchIdException(id);
+        }
+        if (customUser.isPresent()) {
+            return customUser.get();
+        } else {
+            throw new NoElementWithSuchIdException(id);
+        }
     }
 
     private boolean checkEmailAvailability(String email) {

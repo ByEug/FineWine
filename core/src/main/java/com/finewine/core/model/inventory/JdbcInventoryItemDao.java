@@ -4,11 +4,15 @@ import com.finewine.core.model.product.Product;
 import com.finewine.core.model.product.ProductDao;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,8 +67,17 @@ public class JdbcInventoryItemDao implements InventoryItemDao {
     }
 
     @Override
-    public void save(Long stockId, Long productId, Long inventoryId) {
-        jdbcTemplate.update(SQL_INSERT_NEW_ITEM, stockId, productId, inventoryId, false);
+    public Long save(Long stockId, Long productId, Long inventoryId) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        Object[] params = new Object[]{stockId, productId, inventoryId, false};
+        jdbcTemplate.update(connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_NEW_ITEM, Statement.RETURN_GENERATED_KEYS);
+            for (int i = 1; i <= params.length; i++) {
+                preparedStatement.setObject(i, params[i - 1]);
+            }
+            return preparedStatement;
+        }, keyHolder);
+        return keyHolder.getKey().longValue();
     }
 
     private final class InventoryItemBeanPropertyRowMapper extends BeanPropertyRowMapper<InventoryItem> {

@@ -10,7 +10,7 @@
         <intercept-url pattern="/admin/*" access="ROLE_ADMIN" />
         <form-login
                 login-page="/login"
-                default-target-url="/productList"
+                default-target-url="/success-login"
                 authentication-failure-url="/login?error=true"
                 username-parameter="username_login"
                 password-parameter="password_login"

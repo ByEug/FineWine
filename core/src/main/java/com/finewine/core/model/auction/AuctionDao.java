@@ -13,6 +13,8 @@ public interface AuctionDao {
 
     List<Auction> getAllLiveAuctions();
 
+    Optional<Auction> getById(Long Id);
+
     Optional<Auction> getByItemId(Long inventoryItemId);
 
     void buyAction(Long inventoryId, Long buyerId);

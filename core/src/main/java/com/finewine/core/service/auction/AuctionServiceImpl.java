@@ -7,6 +7,12 @@ import com.finewine.core.model.auction.AuctionDao;
 import com.finewine.core.model.form.AddToMarketDTO;
 import com.finewine.core.model.inventory.InventoryItem;
 import com.finewine.core.model.inventory.InventoryItemDao;
+import com.finewine.core.model.logs.auction.AuctionLog;
+import com.finewine.core.model.logs.auction.AuctionLogAction;
+import com.finewine.core.model.logs.auction.AuctionLogDao;
+import com.finewine.core.model.logs.inventory.InventoryLog;
+import com.finewine.core.model.logs.inventory.InventoryLogAction;
+import com.finewine.core.model.logs.inventory.InventoryLogDao;
 import com.finewine.core.model.user.CustomUser;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -28,6 +34,12 @@ public class AuctionServiceImpl implements AuctionService {
     @Resource
     private InventoryItemDao inventoryItemDao;
 
+    @Resource
+    private InventoryLogDao inventoryLogDao;
+
+    @Resource
+    private AuctionLogDao auctionLogDao;
+
     @Override
     public Long saveNewAuction(Long inventoryId, CustomUser seller, AddToMarketDTO addToMarketDTO) {
         inventoryItemDao.updateOnSell(inventoryId, Boolean.TRUE);
@@ -37,12 +49,30 @@ public class AuctionServiceImpl implements AuctionService {
         auction.setAucStatus(AucStatus.Live);
         auction.setSellPrice(BigDecimal.valueOf(Double.parseDouble(addToMarketDTO.getPrice())));
         auction.setSeller(seller);
-        return auctionDao.save(auction, inventoryId);
+        Long auctionId = auctionDao.save(auction, inventoryId);
+
+        InventoryLog inventoryLog = new InventoryLog();
+        inventoryLog.setInventoryItem(inventoryItemDao.findById(inventoryId).get());
+        inventoryLog.setAction(InventoryLogAction.Retrieving);
+        inventoryLog.setCreatingDate(Date.valueOf(LocalDate.now()));
+        inventoryLogDao.save(inventoryLog, seller.getId());
+
+        AuctionLog auctionLog = new AuctionLog();
+        auctionLog.setCreatingDate(Date.valueOf(LocalDate.now()));
+        auctionLog.setAction(AuctionLogAction.Sale);
+        auctionLog.setAuction(auctionDao.getById(auctionId).get());
+        auctionLogDao.save(auctionLog, seller.getId());
+        return auctionId;
     }
 
     @Override
     public void closeAuction(Long inventoryId, CustomUser seller) {
         inventoryItemDao.updateOnSell(inventoryId, Boolean.FALSE);
+        InventoryLog inventoryLog = new InventoryLog();
+        inventoryLog.setInventoryItem(inventoryItemDao.findById(inventoryId).get());
+        inventoryLog.setAction(InventoryLogAction.Adding);
+        inventoryLog.setCreatingDate(Date.valueOf(LocalDate.now()));
+        inventoryLogDao.save(inventoryLog, seller.getId());
         auctionDao.updateClose(inventoryId);
     }
 
@@ -73,6 +103,12 @@ public class AuctionServiceImpl implements AuctionService {
     @Override
     public void buyAuction(Long inventoryId, CustomUser buyer) {
         auctionDao.buyAction(inventoryId, buyer.getId());
+        Auction auction = auctionDao.getByItemId(inventoryId).get();
+        AuctionLog auctionLog = new AuctionLog();
+        auctionLog.setCreatingDate(Date.valueOf(LocalDate.now()));
+        auctionLog.setAction(AuctionLogAction.Purchase);
+        auctionLog.setAuction(auction);
+        auctionLogDao.save(auctionLog, buyer.getId());
         inventoryItemDao.updateOnSell(inventoryId, Boolean.FALSE);
         inventoryItemDao.updateInventory(buyer.getInventory().getId(), inventoryId);
     }

@@ -2,6 +2,9 @@ package com.finewine.core.service.inventory;
 
 import com.finewine.core.exception.NoElementWithSuchIdException;
 import com.finewine.core.model.inventory.*;
+import com.finewine.core.model.logs.inventory.InventoryLog;
+import com.finewine.core.model.logs.inventory.InventoryLogAction;
+import com.finewine.core.model.logs.inventory.InventoryLogDao;
 import com.finewine.core.model.order.Order;
 import com.finewine.core.model.user.CustomUser;
 import com.finewine.core.service.user.CustomUserService;
@@ -9,6 +12,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +30,9 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Resource
     private InventoryItemDao inventoryItemDao;
+
+    @Resource
+    private InventoryLogDao inventoryLogDao;
 
     @Resource
     private CustomUserService customUserService;
@@ -58,7 +66,12 @@ public class InventoryServiceImpl implements InventoryService {
             overallQuantity.updateAndGet(v -> v + quantity);
             InventoryStock inventoryStock = new InventoryStock(quantity);
             Long stockId = inventoryStockDao.save(inventoryStock);
-            inventoryItemDao.save(stockId, orderItem.getProduct().getId(), customUser.getInventory().getId());
+            Long inventoryItemId = inventoryItemDao.save(stockId, orderItem.getProduct().getId(), customUser.getInventory().getId());
+            InventoryLog inventoryLog = new InventoryLog();
+            inventoryLog.setCreatingDate(Date.valueOf(LocalDate.now()));
+            inventoryLog.setAction(InventoryLogAction.Adding);
+            inventoryLog.setInventoryItem(inventoryItemDao.findById(inventoryItemId).get());
+            inventoryLogDao.save(inventoryLog, customUser.getId());
         });
         inventoryDao.update(customUser.getInventory().getOverallQuantity() + overallQuantity.get(),
                 customUser.getInventory().getId());
